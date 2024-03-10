@@ -27331,11 +27331,11 @@ const MainView = ()=>{
             const moviesFromApi = data.map((movie)=>{
                 return {
                     id: movie._id,
-                    image: movie.ImgPath,
+                    image: movie.ImagePath,
                     title: movie.Title,
                     description: movie.Description,
-                    genre: movie.Genre,
-                    director: movie.Director
+                    genre: movie.Genre.Name,
+                    director: movie.Director.Name
                 };
             });
             setMovies(moviesFromApi);
