@@ -22,7 +22,6 @@ export const MainView = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 const moviesFromApi = data.map((movie) => {
                     return {
                         id: movie._id,
@@ -33,7 +32,6 @@ export const MainView = () => {
                         director: movie.Director.Name,
                     };
                 });
-                localStorage.setItem("movies", JSON.stringify(moviesFromApi));
                 setMovies(moviesFromApi);
             });
     }, [token]);
