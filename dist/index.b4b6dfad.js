@@ -28447,10 +28447,10 @@ const LoginView = ({ onLoggedIn })=>{
         //this prevents the default behavior of the form which is to reload the entire page
         event.preventDefault();
         const data = {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         };
-        fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/users", {
+        fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
