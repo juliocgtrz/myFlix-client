@@ -22,7 +22,7 @@ export const MainView = () => {
         }    
 
         fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/movies", {
-            headers: { Authorization: 'Bearer ${token}' },
+            headers: { Authorization: 'Bearer ${token}' }
         })
             .then((response) => response.json())
             .then((data) => {
@@ -46,21 +46,13 @@ export const MainView = () => {
         <Row className="justify-content-md-center">
             {!user ? (
                 <Col md={5}>
-                    <LoginView onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                    }} />
+                    <LoginView onLoggedIn={(user, token) => { setUser(user); setToken(token); }} />
                     or
                     <SignupView />
                 </Col>
             ) : selectedMovie ? (
                 <>
-                    <Button onClick={() => {
-                        setUser(null);
-                        setToken(null);
-                        localStorage.clear();
-                    }}
-                    >
+                    <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
                     Logout
                     </Button>
                     <Col md={8}>
@@ -69,24 +61,14 @@ export const MainView = () => {
                 </>
             ) : movies.length === 0 ? (
                 <>
-                    <Button onClick={() => {
-                        setUser(null);
-                        setToken(null);
-                        localStorage.clear();
-                    }}
-                    >
+                    <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
                         Logout
                     </Button>
                     <div>The list is empty!</div>;
                 </>
             ) : (
                 <>
-                    <Button onClick={() => {
-                        setUser(null);
-                        setToken(null);
-                        localStorage.clear();
-                    }}
-                    >
+                    <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
                         Logout
                     </Button>
                     {movies.map((movie) => (
