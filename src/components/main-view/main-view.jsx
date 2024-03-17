@@ -26,6 +26,7 @@ export const MainView = () => {
         })
             .then((response) => response.json())
             .then((data) => {
+                console.log(token);
                 const moviesFromApi = data.map((movie) => {
                     return {
                         id: movie._id,
