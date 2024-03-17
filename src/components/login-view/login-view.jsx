@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootrstap/Form";
+import Form from "react-bootstrap/Form";
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState("");
@@ -61,7 +61,7 @@ export const LoginView = ({ onLoggedIn }) => {
                     required
                 />
             </Form.Group>
-            <Button variant="primary" type="submit">Submit</Button>
+            <Button variant="primary" type="submit">Login</Button>
         </Form>
     );
 };
