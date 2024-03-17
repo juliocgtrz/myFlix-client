@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useState } from "react";
 
 export const LoginView = ({ onLoggedIn }) => {
@@ -9,20 +10,31 @@ export const LoginView = ({ onLoggedIn }) => {
         event.preventDefault();
 
         const data = {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         };
 
-        fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/users",{
+        fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/login",{
             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(data)
-        }).then((response) => {
-            if (response.ok) {
-                onLoggedIn(username);
-            }else{
-                alert("Login failed");
-            }
-        });
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Login response: ", data);
+                if (data.user) {
+                    localStorage.setItem("user", JSON.stringify(data.user));
+                    localStorage.setItem("token", data.token);
+                    onLoggedIn(data.user, data.token);
+                }else{
+                    alert("No such user");
+                }
+            })
+            .catch((e) => {
+                alert("Something went wrong");
+            });
     };
 
     return (
@@ -31,8 +43,10 @@ export const LoginView = ({ onLoggedIn }) => {
                 Username:
                 <input 
                     type="text"
+                    minLength="5"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    required
                 />
             </label>
             <label>
@@ -41,6 +55,7 @@ export const LoginView = ({ onLoggedIn }) => {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
             </label>
             <button type="submit">Submit</button>
