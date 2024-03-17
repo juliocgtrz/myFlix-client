@@ -47,6 +47,7 @@ export const SignupView = () => {
                     minLength="3"
                 />
             </Form.Group>
+
             <Form.Group controlId="formPassword">
                 <Form.Label>Password:</Form.Label>
                 <Form.Control
@@ -56,6 +57,7 @@ export const SignupView = () => {
                     required
                 />
             </Form.Group>
+
             <Form.Group controlId="formEmail">
                 <Form.Label>Email:</Form.Label>
                 <Form.Control
@@ -65,6 +67,7 @@ export const SignupView = () => {
                     required
                 />
             </Form.Group>
+            
             <Form.Group controlId="formBirthday">
                 <Form.Label>Birthday:</Form.Label>
                 <Form.Control
