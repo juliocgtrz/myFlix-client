@@ -21,7 +21,7 @@ export const MainView = () => {
         }    
 
         fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/movies", {
-            headers: { Authorization: 'Bearer ${token}' }
+            headers: { Authorization: `Bearer ${token}` }
         })
             .then((response) => response.json())
             .then((data) => {
@@ -49,13 +49,26 @@ export const MainView = () => {
                     <SignupView />
                 </Col>
             ) : selectedMovie ? (
-                <Col md={8}>
-                    <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-                </Col>
+                <>
+                    <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
+                    Logout
+                    </Button>
+                    <Col md={8}>
+                        <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+                    </Col>
+                </>
             ) : movies.length === 0 ? (
-                <div>The list is empty!</div>
+                <>
+                    <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
+                        Logout
+                    </Button>
+                    <div>The list is empty!</div>
+                </>
             ) : (
                 <>
+                    <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
+                        Logout
+                    </Button>
                     {movies.map((movie) => (
                         <Col className="mb-5" key={movie.id} md={3}>
                             <MovieCard
@@ -67,9 +80,6 @@ export const MainView = () => {
                             />
                         </Col>    
                     ))}
-                    <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
-                        Logout
-                    </Button>
                 </>
             )}
         </Row>
