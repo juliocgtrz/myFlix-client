@@ -27355,14 +27355,14 @@ const MainView = ()=>{
                 Authorization: "Bearer ${token}"
             }
         }).then((response)=>response.json()).then((data)=>{
-            const moviesFromApi = movie.map((movie1)=>{
+            const moviesFromApi = data.map((movie)=>{
                 return {
-                    id: movie1._id,
-                    image: movie1.ImagePath,
-                    title: movie1.Title,
-                    description: movie1.Description,
-                    genre: movie1.Genre.Name,
-                    director: movie1.Director.Name
+                    id: movie._id,
+                    image: movie.ImagePath,
+                    title: movie.Title,
+                    description: movie.Description,
+                    genre: movie.Genre.Name,
+                    director: movie.Director.Name
                 };
             });
             localStorage.setItem("movies", JSON.stringify(moviesFromApi));
@@ -27419,20 +27419,20 @@ const MainView = ()=>{
             columnNumber: 17
         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
             children: [
-                movies.map((movie1)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                         className: "mb-5",
                         md: 3,
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                            movie: movie1,
+                            movie: movie,
                             onMovieClick: (newSelectedMovie)=>{
                                 setSelectedMovie(newSelectedMovie);
                             }
-                        }, movie1.id, false, {
+                        }, movie.id, false, {
                             fileName: "src/components/main-view/main-view.jsx",
                             lineNumber: 61,
                             columnNumber: 29
                         }, undefined)
-                    }, movie1.id, false, {
+                    }, movie.id, false, {
                         fileName: "src/components/main-view/main-view.jsx",
                         lineNumber: 60,
                         columnNumber: 25
