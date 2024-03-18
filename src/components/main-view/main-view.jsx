@@ -35,7 +35,6 @@ export const MainView = () => {
                         director: movie.Director.Name,
                     };
                 });
-                localStorage.setItem("movies", JSON.stringify(moviesFromApi));
                 setMovies(moviesFromApi);
             });
     }, [token]);
