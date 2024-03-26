@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-});({"hNPDZ":[function(require,module,exports) {
+})({"hNPDZ":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
