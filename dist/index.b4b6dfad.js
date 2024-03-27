@@ -42334,7 +42334,7 @@ $parcel$ReactRefreshHelpers$8767.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "favoriteMovies", ()=>favoriteMovies);
+parcelHelpers.export(exports, "FavoriteMovies", ()=>FavoriteMovies);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -42344,7 +42344,7 @@ var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _movieCard = require("../movie-card/movie-card");
 var _reactRouterDom = require("react-router-dom");
-const favoriteMovies = ({ user, favoriteMovies })=>{
+const FavoriteMovies = ({ user, favoriteMovies })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
@@ -42401,6 +42401,9 @@ const favoriteMovies = ({ user, favoriteMovies })=>{
         columnNumber: 9
     }, undefined);
 };
+_c = FavoriteMovies;
+var _c;
+$RefreshReg$(_c, "FavoriteMovies");
 
   $parcel$ReactRefreshHelpers$8767.postlude(module);
 } finally {
