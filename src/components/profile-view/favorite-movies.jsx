@@ -24,5 +24,5 @@ export const favoriteMovies = ({user, favoriteMovies}) => {
                 })}
             </Row>
         </Row>
-    )
-}
+    );
+};
