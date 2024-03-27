@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Button, Card, Container } from "react-bootstrap";
 import { UserInfo } from "./user-info";
 import { FavoriteMovies } from "./favorite-movies";
@@ -21,10 +22,10 @@ export const ProfileView = ({localUser, movies, token}) => {
         password: password,
         email: email,
         birthday: birthday
-    }
+    };
     const handleSubmit = (event) => {
         event.preventDefault(event);
-        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.username}`, {
+        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${storedUser.username}`, {
             method: "PUT",
             body: JSON.stringify(formData),
             headers: {
@@ -74,7 +75,7 @@ export const ProfileView = ({localUser, movies, token}) => {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}`,
             "Content-Type": "application/json"
-        }
+            }
         }).then ((response) => {
             if (response.ok) {
                 alert("Account deleted successfully");
@@ -82,7 +83,7 @@ export const ProfileView = ({localUser, movies, token}) => {
                 window.location.reload();
             } else {
                 alert("Something went wrong");
-            }
+                }
         });
     };
 
@@ -148,4 +149,10 @@ export const ProfileView = ({localUser, movies, token}) => {
             </Row>
         </Container>
     );
+};
+
+ProfileView.PropTypes = {
+    localUser: PropTypes.object.isRequired,
+    movies: PropTypes.array.isRequired,
+    token: PropTypes.string.isRequired
 };
