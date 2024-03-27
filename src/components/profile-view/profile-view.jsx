@@ -62,7 +62,7 @@ export const ProfileView = ({localUser, movies, token}) => {
                 break;
             case "date":
                 setBirthday(e.target.value);
-                default;
+                default:
         }
     }
 
