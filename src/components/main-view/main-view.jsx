@@ -37,7 +37,7 @@ export const MainView = () => {
                         director: movie.Director.Name,
                     };
                 });
-                localStorage.setItem("movies", JSON.stringify(moviesFromApi));
+                // localStorage.setItem("movies", JSON.stringify(moviesFromApi));
                 setMovies(moviesFromApi);
             });
     }, [token]);
@@ -76,7 +76,8 @@ export const MainView = () => {
                                     <Navigate to="/" />
                                 ) : (
                                     <Col md={5}>
-                                        <LoginView onLoggedIn={(user, token) => { setUser(user); setToken(token); }} />
+                                        <LoginView onLoggedIn={(user) => setUser(user)} />
+                                        {/* <LoginView onLoggedIn={(user, token) => { setUser(user); setToken(token); }} /> */}
                                     </Col>
                                 )}
                             </>
