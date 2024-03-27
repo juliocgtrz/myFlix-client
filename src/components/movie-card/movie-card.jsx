@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export const MovieCard = ({ movie, isFavorite }) => {
     const storedToken = localStorage.getItem("token");
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    const [user, setUser] = useState(storedUser? storedUser: null);
+    const [user, setUser] = useState(storedUser ? storedUser: null);
     const [token, setToken] = useState(storedToken ? storedToken : null);
 
     const [addTitle, setAddTitle] = useState("");
@@ -101,7 +101,8 @@ export const MovieCard = ({ movie, isFavorite }) => {
     );
 };
 
-MovieCard.propTypes = {
+MovieCard.PropTypes = {
+    isFavorite: PropTypes.bool.isRequired,
     movie: PropTypes.shape({
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
