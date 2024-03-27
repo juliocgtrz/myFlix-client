@@ -40,7 +40,7 @@ export const ProfileView = ({localUser, movies, token}) => {
         })
         .then((user) => {
             if (user) {
-                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem("user", JSON.stringify(user));
                 setUser(user)
             }
         })
