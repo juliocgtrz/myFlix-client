@@ -32,6 +32,12 @@ export const MovieCard = ({ movie, isFavorite }) => {
                 window.location.reload();
                 return response.json();
             })
+            .then((user) => {
+                if (user) {
+                    localStorage.setItem("user", JSON.stringify(user));
+                    setUser(user);
+                }
+            })
             .catch((error) => {
                 console.error(error);
             });
