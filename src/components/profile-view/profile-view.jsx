@@ -144,5 +144,5 @@ export const ProfileView = ({localUser, movies, token}) => {
                 </Col>
             </Row>
         </Container>
-    )
-}
+    );
+};
