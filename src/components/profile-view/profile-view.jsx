@@ -131,10 +131,10 @@ export const ProfileView = ({localUser, movies, token}) => {
                 <Card className="mb-5">
                     <Card.Body>
                         <UpdateUser
-                        formData={formData}
-                        handleUpdate={handleUpdate}
-                        handleSubmit={handleSubmit}
-                        handleDeleteAccount={handleDeleteAccount}
+                            formData={formData}
+                            handleUpdate={handleUpdate}
+                            handleSubmit={handleSubmit}
+                            handleDeleteAccount={handleDeleteAccount}
                         />
                     </Card.Body>
                 </Card>
