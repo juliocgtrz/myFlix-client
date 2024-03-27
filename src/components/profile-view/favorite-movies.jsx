@@ -26,3 +26,8 @@ export const FavoriteMovies = ({user, favoriteMovies}) => {
         </Row>
     );
 };
+
+FavoriteMovies.PropTypes = {
+    favoriteMovies: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired
+};
