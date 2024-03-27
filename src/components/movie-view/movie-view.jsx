@@ -4,9 +4,9 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movie }) => {
     const { movieId } = useParams();
-    const movie = movies.find((b) => b.id === bookId);
+    const movie = movies.find((m) => m.id === movieId);
     return (
         <div>
             <div>
@@ -28,8 +28,12 @@ export const MovieView = ({ movie, onBackClick }) => {
                 <span>Director: </span>
                 <span>{movie.director}</span>
             </div>
+            <div>
+                <span>Featured: </span>
+                <span>{movie.featured ? "True" : "False"}</span>
+            </div>
             <Link to={`/`}>
-                <Button onClick={onBackClick} className="back-button" style={{ cursor: "pointer" }}>Back</Button>
+                <Button className="back-button" style={{ cursor: "pointer" }}>Back</Button>
             </Link>
         </div>
     );
