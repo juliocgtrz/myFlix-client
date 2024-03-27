@@ -42539,7 +42539,7 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
                             type: "date",
-                            value: formData.birthday.slice(0, 10),
+                            value: formData.birthday?.slice(0, 10),
                             onChange: (e)=>handleUpdate(e),
                             required: true
                         }, void 0, false, {
