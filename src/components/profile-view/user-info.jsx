@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const UserInfo = ({email, username}) => {
+export const UserInfo = ({email, name}) => {
     return (
         <div>
-            <p>Username: {user.username} </p>
-            <p>Email: {user.email} </p>
+            <p>Username: {name} </p>
+            <p>Email: {email} </p>
         </div>
     );
 };
