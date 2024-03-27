@@ -27367,7 +27367,7 @@ const MainView = ()=>{
                     director: movie.Director.Name
                 };
             });
-            // localStorage.setItem("movies", JSON.stringify(moviesFromApi));
+            localStorage.setItem("movies", JSON.stringify(moviesFromApi));
             setMovies(moviesFromApi);
         });
     }, [
