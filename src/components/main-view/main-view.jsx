@@ -113,7 +113,7 @@ export const MainView = () => {
                                             <Col className="mb-4" key={book.id} md={3}>
                                                 <MovieCard
                                                     movie={movie}
-                                                    isFavorite={user.favoriteMovies.includes(movie.title)}
+                                                    isFavorite={user.favoriteMovies?.includes(movie.title)}
                                                 />
                                             </Col>
                                         ))}
