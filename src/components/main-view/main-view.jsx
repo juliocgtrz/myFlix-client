@@ -4,6 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -13,7 +14,6 @@ export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [movies, setMovies] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
     const [user, setUser] = useState(storedUser? storedUser : null);
     const [token, setToken] = useState(storedToken? storedToken : null);
 
@@ -48,6 +48,8 @@ export const MainView = () => {
                 user={user}
                 onLoggedOut={() => {
                     setUser(null);
+                    setToken(null);
+                    localStorage.clear();
                 }}
             />
             <Row className="justify-content-md-center">
@@ -108,10 +110,31 @@ export const MainView = () => {
                                     <>
                                         {movies.map((movie) => (
                                             <Col className="mb-4" key={book.id} md={3}>
-                                                <MovieCard movie={movie} />
+                                                <MovieCard
+                                                movie={movie}
+                                                isFavorite={user.favoriteMovies.includes(movie.title)}
+                                                />
                                             </Col>
                                         ))}
                                     </>
+                                )}
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/profile"
+                        element={
+                            <>
+                                {!user ? (
+                                    <Navigate to="/login" replace />
+                                ) : (
+                                    <Col md={8}>
+                                        <ProfileView
+                                        localUser={user}
+                                        movies={movies}
+                                        token={token}
+                                        />
+                                    </Col>
                                 )}
                             </>
                         }
@@ -121,38 +144,3 @@ export const MainView = () => {
         </BrowserRouter>
     );
 };
-
-// ) : selectedMovie ? (
-//     <>
-//         <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
-//         Logout
-//         </Button>
-//         <Col md={8}>
-//             <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-//         </Col>
-//     </>
-// ) : movies.length === 0 ? (
-//     <>
-//         <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
-//             Logout
-//         </Button>
-//         <div>The list is empty!</div>
-//     </>
-// ) : (
-//     <>
-//         <Button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>
-//             Logout
-//         </Button>
-//         {movies.map((movie) => (
-//             <Col className="mb-5" key={movie.id} md={3}>
-//                 <MovieCard
-//                     key={movie.id}
-//                     movie={movie}
-//                     onMovieClick={(newSelectedMovie) => {
-//                         setSelectedMovie(newSelectedMovie);
-//                     }}
-//                 />
-//             </Col>    
-//         ))}
-//     </>
-// )}
