@@ -27734,9 +27734,10 @@ const MovieCard = ({ movie, isFavorite })=>{
         ]
     }, void 0, true);
 };
-_s(MovieCard, "V+cT+w/6U3R4dEHg5RghZbIMO7Y=");
+_s(MovieCard, "iyErqKemxKOEoiAPUtiRoAYx328=");
 _c = MovieCard;
-MovieCard.propTypes = {
+MovieCard.PropTypes = {
+    isFavorite: (0, _propTypesDefault.default).bool.isRequired,
     movie: (0, _propTypesDefault.default).shape({
         id: (0, _propTypesDefault.default).string.isRequired,
         title: (0, _propTypesDefault.default).string.isRequired,
