@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Container } from "react-bootstrap";
+import { UserInfo } from "./user-info";
+import { favoriteMovies } from "./favorite-movies";
+import { UpdateUser } from "./update-user";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
