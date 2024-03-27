@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -58,4 +59,11 @@ export const UpdateUser = ({formData, handleUpdate, handleSubmit, handleDeleteAc
             </Form>
         </Row>
     );
+};
+
+UpdateUser.PropTypes = {
+    formData: PropTypes.object.isRequired,
+    handleUpdate: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleDeleteAccount: PropTypes.func.isRequired
 };
