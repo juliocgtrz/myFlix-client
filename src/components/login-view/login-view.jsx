@@ -22,21 +22,21 @@ export const LoginView = ({ onLoggedIn }) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
+        }).then((response) => response.json())
+        .then((data) => {
+            console.log("Login response: ", data);
+            if (data.user) {
+                localStorage.setItem("user", JSON.stringify(data.user));
+                localStorage.setItem("token", data.token);
+                onLoggedIn(data.user, data.token);
+            } else {
+                alert("No such user");
+            }
         })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Login response: ", data);
-                if (data.user) {
-                    localStorage.setItem("user", JSON.stringify(data.user));
-                    localStorage.setItem("token", data.token);
-                    onLoggedIn(data.user, data.token);
-                } else {
-                    alert("No such user");
-                }
-            })
-            .catch((e) => {
-                alert("Something went wrong");
-            });
+        .catch((e) => {
+            console.error("login error: ", e);
+            alert("Something went wrong");
+        });
     };
 
     return (
@@ -49,6 +49,7 @@ export const LoginView = ({ onLoggedIn }) => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
+                    className="mb-4"
                 />
             </Form.Group>
                     
@@ -59,6 +60,7 @@ export const LoginView = ({ onLoggedIn }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="mb-4"
                 />
             </Form.Group>
             <Button variant="primary" type="submit">Login</Button>
