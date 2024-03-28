@@ -11,10 +11,10 @@ import Col from "react-bootstrap/Col";
 export const ProfileView = ({localUser, movies, token }) => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    const [username, setUsername]= useState(storedUser.username);
-    const [password, setPassword]= useState(storedUser.password);
-    const [email,setEmail]= useState(storedUser.email);
-    const [birthday, setBirthday]= useState(storedUser.birthday);
+    const [username, setUsername]= useState(storedUser.Username);
+    const [password, setPassword]= useState(storedUser.Password);
+    const [email,setEmail]= useState(storedUser.Email);
+    const [birthday, setBirthday]= useState(storedUser.Birthday);
     const [user, setUser]= useState();
     const favoriteMovies = user === undefined ? [] : movies.filter(m => user.favoriteMovies?.includes(m.title));
 
@@ -26,7 +26,7 @@ export const ProfileView = ({localUser, movies, token }) => {
     };
     const handleSubmit = (event) => {
         event.preventDefault(event);
-        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.username}`, {
+        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}`, {
             method: "PUT",
             body: JSON.stringify(formData),
             headers: {
@@ -72,7 +72,7 @@ export const ProfileView = ({localUser, movies, token }) => {
     }
 
     const handleDeleteAccount = () => {
-        fetch (`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${storedUser.username}`, {
+        fetch (`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${storedUser.Username}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}`,
             "Content-Type": "application/json"
@@ -109,7 +109,7 @@ export const ProfileView = ({localUser, movies, token }) => {
                     favoriteMovies: resultUser.favoriteMovies
                 };
             });
-            setUser(usersFromApi.find((u) => u.username === localUser.username));
+            setUser(usersFromApi.find((u) => u.username === localUser.Username));
             console.log("Profile Saved User: " + JSON.stringify(user));
         })
         .catch((error) => {
@@ -125,7 +125,7 @@ export const ProfileView = ({localUser, movies, token }) => {
                         <Card.Title>My Profile</Card.Title>
                         <Card.Text>
                             {
-                                user && (<UserInfo name={user.username} email={user.email} />)
+                                user && (<UserInfo name={user.Username} email={user.Email} />)
                             }
                         </Card.Text>
                     </Card.Body>
