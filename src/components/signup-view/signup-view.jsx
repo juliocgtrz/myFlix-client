@@ -29,7 +29,7 @@ export const SignupView = () => {
             if (response.ok) {
                 alert("Signup successful");
                 window.location.reload();
-            }else{
+            } else {
                 alert("Signup failed");
             }
         });
@@ -37,7 +37,7 @@ export const SignupView = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formUsername">
+            <Form.Group controlId="signUpFormUsername">
                 <Form.Label>Username:</Form.Label>
                 <Form.Control
                     type="text"
@@ -45,36 +45,40 @@ export const SignupView = () => {
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     minLength="3"
+                    className="mb-4"
                 />
             </Form.Group>
 
-            <Form.Group controlId="formPassword">
+            <Form.Group controlId="signUpFormPassword">
                 <Form.Label>Password:</Form.Label>
                 <Form.Control
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="mb-4"
                 />
             </Form.Group>
 
-            <Form.Group controlId="formEmail">
+            <Form.Group controlId="signUpFormEmail">
                 <Form.Label>Email:</Form.Label>
                 <Form.Control
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="mb-4"
                 />
             </Form.Group>
             
-            <Form.Group controlId="formBirthday">
+            <Form.Group controlId="signUpFormBirthday">
                 <Form.Label>Birthday:</Form.Label>
                 <Form.Control
                     type="date"
                     value={birthday}
                     onChange={(e) => setBirthday(e.target.value)}
                     required
+                    className="mb-4"
                 />
             </Form.Group>
             <Button variant="primary" type="submit">Sign up</Button>
