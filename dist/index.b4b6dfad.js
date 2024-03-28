@@ -27615,7 +27615,7 @@ const MovieCard = ({ movie, isFavorite })=>{
     const [delTitle, setDelTitle] = (0, _react.useState)("");
     (0, _react.useEffect)(()=>{
         const addToFavorites = ()=>{
-            fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.username}/movies/${encodeURIComponent(movie.title)}`, {
+            fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}/movies/${encodeURIComponent(movie.title)}`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -27636,7 +27636,7 @@ const MovieCard = ({ movie, isFavorite })=>{
             });
         };
         const removeFromFavorites = ()=>{
-            fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.username}/movies/${encodeURIComponent(movie.title)}`, {
+            fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}/movies/${encodeURIComponent(movie.title)}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -42093,10 +42093,10 @@ var _s = $RefreshSig$();
 const ProfileView = ({ localUser, movies, token })=>{
     _s();
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    const [username, setUsername] = (0, _react.useState)(storedUser.username);
-    const [password, setPassword] = (0, _react.useState)(storedUser.password);
-    const [email, setEmail] = (0, _react.useState)(storedUser.email);
-    const [birthday, setBirthday] = (0, _react.useState)(storedUser.birthday);
+    const [username, setUsername] = (0, _react.useState)(storedUser.Username);
+    const [password, setPassword] = (0, _react.useState)(storedUser.Password);
+    const [email, setEmail] = (0, _react.useState)(storedUser.Email);
+    const [birthday, setBirthday] = (0, _react.useState)(storedUser.Birthday);
     const [user, setUser] = (0, _react.useState)();
     const favoriteMovies = user === undefined ? [] : movies.filter((m)=>user.favoriteMovies?.includes(m.title));
     const formData = {
@@ -42107,7 +42107,7 @@ const ProfileView = ({ localUser, movies, token })=>{
     };
     const handleSubmit = (event)=>{
         event.preventDefault(event);
-        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.username}`, {
+        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}`, {
             method: "PUT",
             body: JSON.stringify(formData),
             headers: {
@@ -42147,7 +42147,7 @@ const ProfileView = ({ localUser, movies, token })=>{
         }
     };
     const handleDeleteAccount = ()=>{
-        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${storedUser.username}`, {
+        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${storedUser.Username}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -42179,7 +42179,7 @@ const ProfileView = ({ localUser, movies, token })=>{
                     favoriteMovies: resultUser.favoriteMovies
                 };
             });
-            setUser(usersFromApi.find((u)=>u.username === localUser.username));
+            setUser(usersFromApi.find((u)=>u.username === localUser.Username));
             console.log("Profile Saved User: " + JSON.stringify(user));
         }).catch((error)=>{
             console.error(error);
@@ -42204,8 +42204,8 @@ const ProfileView = ({ localUser, movies, token })=>{
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                                     children: user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _userInfo.UserInfo), {
-                                        name: user.username,
-                                        email: user.email
+                                        name: user.Username,
+                                        email: user.Email
                                     }, void 0, false, {
                                         fileName: "src/components/profile-view/profile-view.jsx",
                                         lineNumber: 128,
@@ -42286,7 +42286,7 @@ const ProfileView = ({ localUser, movies, token })=>{
         columnNumber: 9
     }, undefined);
 };
-_s(ProfileView, "Ry/sBp0+TSrRQuOl2t8YJbP1UK0=");
+_s(ProfileView, "OOV/etAYijl4WShUigvWqB8lupA=");
 _c = ProfileView;
 ProfileView.PropTypes = {
     localUser: (0, _propTypesDefault.default).object.isRequired,
