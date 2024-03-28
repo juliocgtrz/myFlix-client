@@ -16,7 +16,7 @@ export const MovieCard = ({ movie, isFavorite }) => {
 
     useEffect(() => {
         const addToFavorites = () => {
-            fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}/movies/${encodeURIComponent(movie.title)}`,
+            fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}/movies/${encodeURIComponent(movie.id)}`,
                 {
                     method: "POST",
                     headers: {
@@ -45,7 +45,7 @@ export const MovieCard = ({ movie, isFavorite }) => {
 
         };
         const removeFromFavorites = () => {
-            fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}/movies/${encodeURIComponent(movie.title)}`,
+            fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}/movies/${encodeURIComponent(movie.id)}`,
                 {
                     method: "DELETE",
                     headers: {
