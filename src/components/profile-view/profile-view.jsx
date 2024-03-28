@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card, Container } from "react-bootstrap";
 import { UserInfo } from "./user-info";
@@ -7,7 +8,7 @@ import { UpdateUser } from "./update-user";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-export const ProfileView = ({localUser, movies, token}) => {
+export const ProfileView = ({user, movies, token }) => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
     const [username, setUsername]= useState(storedUser.username);
@@ -29,8 +30,8 @@ export const ProfileView = ({localUser, movies, token}) => {
             method: "PUT",
             body: JSON.stringify(formData),
             headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json" }
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}` }
             }
         )
         .then((response) => {
