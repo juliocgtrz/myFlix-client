@@ -42465,6 +42465,8 @@ parcelHelpers.export(exports, "UpdateUser", ()=>UpdateUser);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _form = require("react-bootstrap/Form");
@@ -42480,7 +42482,7 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                     children: "Update profile information"
                 }, void 0, false, {
                     fileName: "src/components/profile-view/update-user.jsx",
-                    lineNumber: 10,
+                    lineNumber: 11,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
@@ -42490,7 +42492,7 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                             children: "Username:"
                         }, void 0, false, {
                             fileName: "src/components/profile-view/update-user.jsx",
-                            lineNumber: 12,
+                            lineNumber: 13,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
@@ -42501,13 +42503,13 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                             required: true
                         }, void 0, false, {
                             fileName: "src/components/profile-view/update-user.jsx",
-                            lineNumber: 13,
+                            lineNumber: 14,
                             columnNumber: 21
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/profile-view/update-user.jsx",
-                    lineNumber: 11,
+                    lineNumber: 12,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
@@ -42520,13 +42522,13 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                                     children: "Your new password must be at least 8 characters long."
                                 }, void 0, false, {
                                     fileName: "src/components/profile-view/update-user.jsx",
-                                    lineNumber: 23,
+                                    lineNumber: 24,
                                     columnNumber: 25
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/profile-view/update-user.jsx",
-                            lineNumber: 22,
+                            lineNumber: 23,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
@@ -42537,13 +42539,13 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                             required: true
                         }, void 0, false, {
                             fileName: "src/components/profile-view/update-user.jsx",
-                            lineNumber: 25,
+                            lineNumber: 26,
                             columnNumber: 21
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/profile-view/update-user.jsx",
-                    lineNumber: 21,
+                    lineNumber: 22,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
@@ -42553,7 +42555,7 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                             children: "Email:"
                         }, void 0, false, {
                             fileName: "src/components/profile-view/update-user.jsx",
-                            lineNumber: 34,
+                            lineNumber: 35,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
@@ -42563,13 +42565,13 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                             required: true
                         }, void 0, false, {
                             fileName: "src/components/profile-view/update-user.jsx",
-                            lineNumber: 35,
+                            lineNumber: 36,
                             columnNumber: 21
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/profile-view/update-user.jsx",
-                    lineNumber: 33,
+                    lineNumber: 34,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
@@ -42579,7 +42581,7 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                             children: "Birthday:"
                         }, void 0, false, {
                             fileName: "src/components/profile-view/update-user.jsx",
-                            lineNumber: 43,
+                            lineNumber: 44,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
@@ -42589,13 +42591,13 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                             required: true
                         }, void 0, false, {
                             fileName: "src/components/profile-view/update-user.jsx",
-                            lineNumber: 44,
+                            lineNumber: 45,
                             columnNumber: 21
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/profile-view/update-user.jsx",
-                    lineNumber: 42,
+                    lineNumber: 43,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
@@ -42604,7 +42606,7 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                     children: "Submit Changes"
                 }, void 0, false, {
                     fileName: "src/components/profile-view/update-user.jsx",
-                    lineNumber: 51,
+                    lineNumber: 52,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
@@ -42614,22 +42616,28 @@ const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount 
                     children: "Delete Account"
                 }, void 0, false, {
                     fileName: "src/components/profile-view/update-user.jsx",
-                    lineNumber: 52,
+                    lineNumber: 53,
                     columnNumber: 17
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/profile-view/update-user.jsx",
-            lineNumber: 9,
+            lineNumber: 10,
             columnNumber: 13
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/profile-view/update-user.jsx",
-        lineNumber: 8,
+        lineNumber: 9,
         columnNumber: 9
     }, undefined);
 };
 _c = UpdateUser;
+UpdateUser.PropTypes = {
+    formData: (0, _propTypesDefault.default).object.isRequired,
+    handleUpdate: (0, _propTypesDefault.default).func.isRequired,
+    handleSubmit: (0, _propTypesDefault.default).func.isRequired,
+    handleDeleteAccount: (0, _propTypesDefault.default).func.isRequired
+};
 var _c;
 $RefreshReg$(_c, "UpdateUser");
 
@@ -42638,6 +42646,6 @@ $RefreshReg$(_c, "UpdateUser");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Button":"aPzUt","react-bootstrap/Form":"iBZ80","react-bootstrap/Row":"cMC39","@parcel/transformer-js/src/esmodule-helpers.js":"3uApo","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"kfDfZ"}],"i5LP7":[function() {},{}]},["hNPDZ","jXCnW","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Button":"aPzUt","react-bootstrap/Form":"iBZ80","react-bootstrap/Row":"cMC39","@parcel/transformer-js/src/esmodule-helpers.js":"3uApo","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"kfDfZ","prop-types":"7wKI2"}],"i5LP7":[function() {},{}]},["hNPDZ","jXCnW","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
