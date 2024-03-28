@@ -4,13 +4,13 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
 
-export const MovieView = ({ movie }) => {
+export const MovieView = ({ movies }) => {
     const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
     return (
         <div>
             <div>
-                <img src={movie.image} />
+                <img src={movie.image} className="justify-content-md-center" />
             </div>
             <div>
                 <span>Title: </span>
