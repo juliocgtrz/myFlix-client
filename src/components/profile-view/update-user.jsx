@@ -44,7 +44,7 @@ export const UpdateUser = ({formData, handleUpdate, handleSubmit, handleDeleteAc
                     <Form.Label>Birthday:</Form.Label>
                     <Form.Control
                         type="date"
-                        value={formData.birthday?.slice(0, 10)}
+                        value={formData.birthday.slice(0, 10)}
                         onChange={(e) => handleUpdate(e)}
                         required
                     />
@@ -55,7 +55,7 @@ export const UpdateUser = ({formData, handleUpdate, handleSubmit, handleDeleteAc
                     variant="outline-secondary"
                     className="mx-3">
                         Delete Account
-                    </Button>
+                </Button>
             </Form>
         </Row>
     );
