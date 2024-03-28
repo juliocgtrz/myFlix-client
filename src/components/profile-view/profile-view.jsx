@@ -8,7 +8,7 @@ import { UpdateUser } from "./update-user";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-export const ProfileView = ({user, movies, token }) => {
+export const ProfileView = ({localUser, movies, token }) => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
     const [username, setUsername]= useState(storedUser.username);
