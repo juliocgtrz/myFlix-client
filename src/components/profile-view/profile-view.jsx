@@ -15,22 +15,22 @@ export const ProfileView = ({localUser, movies, token}) => {
     const [email,setEmail]= useState(storedUser.email);
     const [birthday, setBirthday]= useState(storedUser.birthday);
     const [user, setUser]= useState();
-    const favoriteMovies = user === undefined ? [] : movies.filter(m => user.favoriteMovies?.includes(m.title))
+    const favoriteMovies = user === undefined ? [] : movies.filter(m => user.favoriteMovies.includes(m.title))
 
     const formData = {
-        username: username,
-        password: password,
-        email: email,
-        birthday: birthday
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
     };
     const handleSubmit = (event) => {
         event.preventDefault(event);
-        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${storedUser.username}`, {
+        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.username}`, {
             method: "PUT",
             body: JSON.stringify(formData),
             headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}` }
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json" }
             }
         )
         .then((response) => {
@@ -117,7 +117,7 @@ export const ProfileView = ({localUser, movies, token}) => {
     }, [token]);
 
     return (
-        <Container className="mx-1">
+        <Container>
             <Row>
                 <Card className="mb-5">
                     <Card.Body>
