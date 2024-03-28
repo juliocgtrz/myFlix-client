@@ -42098,7 +42098,7 @@ const ProfileView = ({ localUser, movies, token })=>{
     const [email, setEmail] = (0, _react.useState)(storedUser.email);
     const [birthday, setBirthday] = (0, _react.useState)(storedUser.birthday);
     const [user, setUser] = (0, _react.useState)();
-    const favoriteMovies = user === undefined ? [] : movies.filter((m)=>user.favoriteMovies.includes(m.title));
+    const favoriteMovies = user === undefined ? [] : movies.filter((m)=>user.favoriteMovies?.includes(m.title));
     const formData = {
         Username: username,
         Password: password,
