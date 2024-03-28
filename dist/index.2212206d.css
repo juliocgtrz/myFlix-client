@@ -2,6 +2,14 @@
   color: #4682b4;
 }
 
+.movie-view {
+  text-decoration: none;
+}
+
+img {
+  height: 400px;
+}
+
 .back-button {
   color: #f5f5f5;
   background-color: #1e90ff;
