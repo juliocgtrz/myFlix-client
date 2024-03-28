@@ -14,8 +14,8 @@ export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [movies, setMovies] = useState([]);
-    const [user, setUser] = useState(storedUser? storedUser : null);
-    const [token, setToken] = useState(storedToken? storedToken : null);
+    const [user, setUser] = useState(storedUser ? storedUser : null);
+    const [token, setToken] = useState(storedToken ? storedToken : null);
 
     useEffect(() => {
         if (!token) {
@@ -27,6 +27,7 @@ export const MainView = () => {
         })
             .then((response) => response.json())
             .then((data) => {
+                console.log("Movies data: ", data);
                 const moviesFromApi = data.map((movie) => {
                     return {
                         id: movie._id,
@@ -35,6 +36,7 @@ export const MainView = () => {
                         description: movie.Description,
                         genre: movie.Genre.Name,
                         director: movie.Director.Name,
+                        featured: movie.featured,
                     };
                 });
                 localStorage.setItem("movies", JSON.stringify(moviesFromApi));
@@ -58,7 +60,7 @@ export const MainView = () => {
                         path="/signup"
                         element={
                             <>
-                                {!user ? (
+                                {user ? (
                                     <Navigate to="/" />
                                 ) : (
                                     <Col md={5}>
@@ -77,7 +79,6 @@ export const MainView = () => {
                                 ) : (
                                     <Col md={5}>
                                         <LoginView onLoggedIn={(user) => setUser(user)} />
-                                        {/* <LoginView onLoggedIn={(user, token) => { setUser(user); setToken(token); }} /> */}
                                     </Col>
                                 )}
                             </>
@@ -110,10 +111,10 @@ export const MainView = () => {
                                 ) : (
                                     <>
                                         {movies.map((movie) => (
-                                            <Col className="mb-4" key={movie.id} md={3}>
+                                            <Col className="mb-5" key={movie.id} md={3} sm={12}>
                                                 <MovieCard
                                                     movie={movie}
-                                                    isFavorite={user.favoriteMovies?.includes(movie.title)}
+                                                    isFavorite={user.favoriteMovies.includes(movie.title)}
                                                 />
                                             </Col>
                                         ))}
