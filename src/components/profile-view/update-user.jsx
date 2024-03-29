@@ -61,7 +61,7 @@ export const UpdateUser = ({formData, handleUpdate, handleSubmit, handleDeleteAc
     );
 };
 
-UpdateUser.PropTypes = {
+UpdateUser.propTypes = {
     formData: PropTypes.object.isRequired,
     handleUpdate: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,

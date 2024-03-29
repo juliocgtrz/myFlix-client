@@ -40,7 +40,7 @@ export const MovieView = ({ movies }) => {
     );
 };
 
-MovieView.PropTypes = {
+MovieView.propTypes = {
     movies: PropTypes.shape({
         title: PropTypes.string,
         description: PropTypes.string,

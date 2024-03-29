@@ -1,3 +1,4 @@
+import React from "react";
 import { Navbar, Container, Nav, Row, Col, Form } from "react-bootstrap";
 import { Link, Route, Routes } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -40,7 +41,7 @@ export const NavigationBar = ({ user, movies, onLoggedOut }) => {
     );
 };
 
-NavigationBar.PropTypes = {
+NavigationBar.propTypes = {
     user: PropTypes.object.isRequired,
     onLoggedOut: PropTypes.func.isRequired
 };
