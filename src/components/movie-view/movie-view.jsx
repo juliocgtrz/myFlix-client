@@ -1,12 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import "./movie-view.scss";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies }) => {
+    const { movieId } = useParams();
+    const movie = movies.find((m) => m.id === movieId);
     return (
         <div>
             <div>
-                <img src={movie.image} />
+                <img src={movie.image} className="justify-content-md-center" />
             </div>
             <div>
                 <span>Title: </span>
@@ -24,7 +29,22 @@ export const MovieView = ({ movie, onBackClick }) => {
                 <span>Director: </span>
                 <span>{movie.director}</span>
             </div>
-            <Button onClick={onBackClick} className="back-button" style={{ cursor: "pointer" }}>Back</Button>
+            <div>
+                <span>Featured: </span>
+                <span>{movie.featured ? "True" : "False"}</span>
+            </div>
+            <Link to={`/`}>
+                <Button className="back-button" style={{ cursor: "pointer" }}>Back</Button>
+            </Link>
         </div>
     );
+};
+
+MovieView.PropTypes = {
+    movies: PropTypes.shape({
+        title: PropTypes.string,
+        description: PropTypes.string,
+        genre: PropTypes.string,
+        director: PropTypes.string,
+    }).isRequired,
 };
