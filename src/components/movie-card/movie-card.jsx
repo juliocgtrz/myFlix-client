@@ -109,7 +109,7 @@ export const MovieCard = ({ movie, isFavorite }) => {
     );
 };
 
-MovieCard.PropTypes = {
+MovieCard.propTypes = {
     isFavorite: PropTypes.bool.isRequired,
     movie: PropTypes.shape({
         id: PropTypes.string.isRequired,

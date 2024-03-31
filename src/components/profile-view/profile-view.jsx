@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Card, Container } from "react-bootstrap";
 import { UserInfo } from "./user-info";
@@ -16,8 +15,9 @@ export const ProfileView = ({localUser, movies, token }) => {
     const [email,setEmail]= useState(storedUser.Email);
     const [birthday, setBirthday]= useState(storedUser.Birthday);
     const [user, setUser]= useState();
-    const favoriteMovies = user === undefined ? [] : movies.filter(m => user.favoriteMovies?.includes(m.title));
-
+    
+    const favoriteMovies = localUser === undefined ? [] : movies.filter(m => localUser.FavoriteMovies?.includes(m.id));
+console.log(favoriteMovies)
     const formData = {
         Username: username,
         Password: password,
@@ -152,7 +152,7 @@ export const ProfileView = ({localUser, movies, token }) => {
     );
 };
 
-ProfileView.PropTypes = {
+ProfileView.propTypes = {
     localUser: PropTypes.object.isRequired,
     movies: PropTypes.array.isRequired,
     token: PropTypes.string.isRequired

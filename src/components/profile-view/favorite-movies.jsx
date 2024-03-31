@@ -6,6 +6,9 @@ import { MovieCard } from "../movie-card/movie-card";
 import { Link } from "react-router-dom";
 
 export const FavoriteMovies = ({user, favoriteMovies}) => {
+
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
     return (
         <Row>
             <Col md={12} >
@@ -15,10 +18,10 @@ export const FavoriteMovies = ({user, favoriteMovies}) => {
                 {favoriteMovies.map((movie) => {
                     return (
                         <Col className="mb-5" key={movie.id} md={4}>
-                            <Link to={`/movies/${movie.title}`} />
+                            <Link to={`/movies/${movie.id}`} />
                             <MovieCard
                                 movie={movie}
-                                isFavorite={user.favoriteMovies.includes(movie.title)}
+                                isFavorite={storedUser.FavoriteMovies.includes(movie.id)}
                             />
                         </Col>
                     );
@@ -28,7 +31,7 @@ export const FavoriteMovies = ({user, favoriteMovies}) => {
     );
 };
 
-FavoriteMovies.PropTypes = {
+FavoriteMovies.propTypes = {
     favoriteMovies: PropTypes.array.isRequired,
     user: PropTypes.object.isRequired
 };
