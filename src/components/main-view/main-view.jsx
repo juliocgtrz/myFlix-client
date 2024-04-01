@@ -9,14 +9,20 @@ import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
+import { useSelector, useDispatch } from "react-redux";
+import { setMovies } from "../../redux/reducers/movies";
+import { setUser } from "../../redux/reducers/user/user";
+import { MoviesList } from "../movies-list";
 
 export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
-    const [movies, setMovies] = useState([]);
-    const [user, setUser] = useState(storedUser ? storedUser : null);
+    const movies = useSelector((state) => state.movies.list);
+    const user = useSelector((state) => state.user);
     const [token, setToken] = useState(storedToken ? storedToken : null);
+    const dispatch = useDispatch();
 
+    //Load data from API
     useEffect(() => {
         if (!token) {
             return;
@@ -40,20 +46,13 @@ export const MainView = () => {
                     };
                 });
                 localStorage.setItem("movies", JSON.stringify(moviesFromApi));
-                setMovies(moviesFromApi);
+                dispatch(setMovies(moviesFromApi));
             });
     }, []);
 
     return (
         <BrowserRouter>
-            <NavigationBar
-                user={user}
-                onLoggedOut={() => {
-                    setUser(null);
-                    setToken(null);
-                    localStorage.clear();
-                }}
-            />
+            <NavigationBar />
             <Row className="justify-content-md-center">
                 <Routes>
                     <Route
@@ -78,7 +77,7 @@ export const MainView = () => {
                                     <Navigate to="/" />
                                 ) : (
                                     <Col md={5}>
-                                        <LoginView onLoggedIn={(user) => setUser(user)} />
+                                        <LoginView />
                                     </Col>
                                 )}
                             </>
@@ -94,7 +93,7 @@ export const MainView = () => {
                                     <Col>The list is empty!</Col>
                                 ) : (
                                     <Col md={8}>
-                                        <MovieView movies={movies} />
+                                        <MovieView />
                                     </Col>
                                 )}
                             </>
@@ -104,23 +103,7 @@ export const MainView = () => {
                         path="/"
                         element={
                             <>
-                                {!user ? (
-                                    <Navigate to="/login" replace />
-                                ) : movies.length === 0 ? (
-                                    <Col>The list is empty!</Col>
-                                ) : (
-                                    <>
-                                        {movies.map((movie) => (
-                                            <Col className="mb-5" key={movie.id} md={3} sm={12}>
-                                                <MovieCard
-                                                    movie={movie}
-                                                    isFavorite={user.favoriteMovies?.includes(movie.title)}
-                                                />
-                                            </Col>
-                                        ))}
-                                    </>
-                                )}
-                            </>
+                                {!user ? <Navigate to="/login" replace /> : <MoviesList />}</>
                         }
                     />
                     <Route
