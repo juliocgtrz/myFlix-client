@@ -27,25 +27,27 @@ export const LoginView = ({ onLoggedIn }) => {
         dispatch(loginUser({ username: localUserData.username, password: localUserData.password }));
     };
 
-    useEffect(() => {
-        if (userStatus === "failed") {
-            setModalMessage(userError);
-            setShowModal(true);
-        }
-    }, [userStatus, userError]);
-
-    if (userStatus === "loading") {
-        return (
-            <Container>
-                <Row>
-                    <Col className="d-flex justify-content-center align-items-center" >
-                        <Spinner animation="border" role="status">
-                            <span className="visually-hidden">Loading..</span>
-                        </Spinner>
-                    </Col>
-                </Row>
-            </Container>
-        );
+        fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/login",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then((response) => response.json())
+        .then((data) => {
+            console.log("Login response: ", data);
+            if (data.user) {
+                localStorage.setItem("user", JSON.stringify(data.user));
+                localStorage.setItem("token", data.token);
+                dispatch(setUser(data.user, data.token));
+            } else {
+                alert("No such user");
+            }
+        })
+        .catch((e) => {
+            console.error("login error: ", e);
+            alert("Something went wrong");
+        });
     };
 
     return (
