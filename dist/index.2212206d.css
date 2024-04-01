@@ -1,7 +1,3 @@
-.my-flix {
-  color: #4682b4;
-}
-
 .movie-view {
   text-decoration: none;
 }
@@ -13350,5 +13346,9 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+
+.my-flix {
+  color: #4682b4;
 }
 /*# sourceMappingURL=index.2212206d.css.map */
