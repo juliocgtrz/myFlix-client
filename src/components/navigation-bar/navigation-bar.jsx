@@ -1,12 +1,13 @@
 import React from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar, Container, Nav, Row, Col, Form } from "react-bootstrap";
+import { Link, Route, Routes } from "react-router-dom";
+import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { clearUser } from "../../redux/reducers/user/user";
+import { setUser } from "../../redux/reducers/user/user";
 
 export const NavigationBar = () => {
-    const user = useSelector((state) => state.user.userData);
-    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
+    const dispatch = useDispatch;
 
     return (
         <Navbar bg="light" expand="lg">
@@ -34,6 +35,7 @@ export const NavigationBar = () => {
                                 <Nav.Link as={Link} to="/profile">
                                     Profile
                                 </Nav.Link>
+                                <Nav.Link onClick={() => dispatch(setUser(null))}>Logout</Nav.Link>
                             </>
                         )}
                     </Nav>
