@@ -1,4 +1,5 @@
 node_modules
 .cache
 .parcel-cache
-src/.DS_Store
+.DS_Store
+.DS_Store
