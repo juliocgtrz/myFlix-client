@@ -2,26 +2,14 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router";
 import "./movie-view.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorite } from "../../redux/reducers/user/user";
+import { useSelector } from "react-redux";
 
 export const MovieView = () => {
     const movies = useSelector((state) => state.movies.data);
     const dispatch = useDispatch();
     const { movieId } = useParams();
-    const movie = movies.find(movie => movie.title === movieId);
-    const isFavorite = useSelector((state) => state.user.userData.favoriteMovies.includes(movie.id));
-
-    const toggle = () => {
-        dispatch(toggleFavorite({
-            movieId: movie.id,
-            isFavorite
-        }));
-    }
-
-    function combineGenreNames(genres) {
-        return genres.map((genre) => genre.name).join(", ");
-    }
+    const movie = movies.find((m) => m.id === movieId);
+    const movies = useSelector((state) => state.movies.list);
 
     return (
         <Container className="col-xl-10 col-l-11">
