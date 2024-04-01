@@ -4,10 +4,13 @@ import Button from "react-bootstrap/Button";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
+import { useSelector } from "react-redux";
 
 export const MovieView = ({ movies }) => {
     const { movieId } = useParams();
     const movie = movies.find((m) => m.id === movieId);
+    const movies = useSelector((state) => state.movies.list);
+
     return (
         <div>
             <div>
