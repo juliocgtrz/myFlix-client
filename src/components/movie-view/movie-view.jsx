@@ -44,11 +44,11 @@ export const MovieView = ({ movies }) => {
     );
 };
 
-MovieView.propTypes = {
-    movies: PropTypes.shape({
-        title: PropTypes.string,
-        description: PropTypes.string,
-        genre: PropTypes.string,
-        director: PropTypes.string,
-    }).isRequired,
-};
+// MovieView.propTypes = {
+//     movies: PropTypes.shape({
+//         title: PropTypes.string,
+//         description: PropTypes.string,
+//         genre: PropTypes.string,
+//         director: PropTypes.string,
+//     }).isRequired,
+// };
