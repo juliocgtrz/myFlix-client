@@ -157,7 +157,5 @@ console.log(favoriteMovies)
 };
 
 ProfileView.propTypes = {
-    localUser: PropTypes.object.isRequired,
-    movies: PropTypes.array.isRequired,
-    token: PropTypes.string.isRequired
+    localUser: PropTypes.object.isRequired
 };
