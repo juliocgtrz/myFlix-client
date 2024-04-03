@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
@@ -68,6 +69,6 @@ export const LoginView = ({ onLoggedIn }) => {
     );
 };
 
-LoginView.propTypes = {
-    onLoggedIn: PropTypes.func.isRequired,
-};
+// LoginView.propTypes = {
+//     onLoggedIn: PropTypes.func.isRequired,
+// };
