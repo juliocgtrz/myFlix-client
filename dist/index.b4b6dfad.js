@@ -27229,7 +27229,7 @@ const MainView = ()=>{
     const storedToken = localStorage.getItem("token");
     const movies = (0, _reactRedux.useSelector)((state)=>state.movies.list);
     const user = (0, _reactRedux.useSelector)((state)=>state.user);
-    const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null);
+    const token = (0, _reactRedux.useSelector)((state)=>state.user.token);
     const dispatch = (0, _reactRedux.useDispatch)();
     //Load data from API
     (0, _react.useEffect)(()=>{
@@ -27425,8 +27425,9 @@ const MainView = ()=>{
         columnNumber: 9
     }, undefined);
 };
-_s(MainView, "H81LIvgjFie3pZebtS5die38VEA=", false, function() {
+_s(MainView, "0SWYidxO5OqbpVvlClDsc1keIpo=", false, function() {
     return [
+        (0, _reactRedux.useSelector),
         (0, _reactRedux.useSelector),
         (0, _reactRedux.useSelector),
         (0, _reactRedux.useDispatch)
