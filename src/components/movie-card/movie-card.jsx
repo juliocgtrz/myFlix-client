@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
+import { useSelector } from "react-redux";
 
 export const MovieCard = ({ movie, isFavorite }) => {
     const storedToken = localStorage.getItem("token");
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    const [user, setUser] = useState(storedUser ? storedUser: null);
-    const [token, setToken] = useState(storedToken ? storedToken : null);
+    const user = useSelector((state) => state.user);
+    const token = useSelector((state) => state.user.token);
 
     const [addTitle, setAddTitle] = useState("");
     const [delTitle, setDelTitle] = useState("");
