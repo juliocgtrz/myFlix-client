@@ -6,15 +6,19 @@ import { FavoriteMovies } from "./favorite-movies";
 import { UpdateUser } from "./update-user";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ProfileView = ({localUser, movies, token }) => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
+    const movies = useSelector((state) => state.movies.list);
+    const user = useSelector((state) => state.user);
+    const token = useSelector((state) => state.user.token);
+    const dispatch = useDispatch();
 
     const [username, setUsername]= useState(storedUser.Username);
     const [password, setPassword]= useState(storedUser.Password);
     const [email,setEmail]= useState(storedUser.Email);
     const [birthday, setBirthday]= useState(storedUser.Birthday);
-    const [user, setUser]= useState();
     
     const favoriteMovies = localUser === undefined ? [] : movies.filter(m => localUser.FavoriteMovies?.includes(m.id));
 console.log(favoriteMovies)
