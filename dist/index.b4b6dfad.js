@@ -42736,6 +42736,7 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _reactRedux = require("react-redux");
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _form = require("react-bootstrap/Form");
@@ -42780,7 +42781,7 @@ const LoginView = ({ onLoggedIn })=>{
                         children: "Username:"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 45,
+                        lineNumber: 46,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
@@ -42792,13 +42793,13 @@ const LoginView = ({ onLoggedIn })=>{
                         className: "mb-4"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 46,
+                        lineNumber: 47,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 44,
+                lineNumber: 45,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
@@ -42808,7 +42809,7 @@ const LoginView = ({ onLoggedIn })=>{
                         children: "Password:"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 57,
+                        lineNumber: 58,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
@@ -42819,13 +42820,13 @@ const LoginView = ({ onLoggedIn })=>{
                         className: "mb-4"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 58,
+                        lineNumber: 59,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 56,
+                lineNumber: 57,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
@@ -42834,21 +42835,20 @@ const LoginView = ({ onLoggedIn })=>{
                 children: "Login"
             }, void 0, false, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 66,
+                lineNumber: 67,
                 columnNumber: 13
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/login-view/login-view.jsx",
-        lineNumber: 43,
+        lineNumber: 44,
         columnNumber: 9
     }, undefined);
-};
+}; // LoginView.propTypes = {
+ //     onLoggedIn: PropTypes.func.isRequired,
+ // };
 _s(LoginView, "Lrw7JeD9zj6OUWhT/IH4OIvPKEk=");
 _c = LoginView;
-LoginView.propTypes = {
-    onLoggedIn: (0, _propTypesDefault.default).func.isRequired
-};
 var _c;
 $RefreshReg$(_c, "LoginView");
 
@@ -42857,7 +42857,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","react-bootstrap/Button":"aPzUt","react-bootstrap/Form":"iBZ80","@parcel/transformer-js/src/esmodule-helpers.js":"3uApo","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"kfDfZ"}],"4OGiN":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","react-bootstrap/Button":"aPzUt","react-bootstrap/Form":"iBZ80","@parcel/transformer-js/src/esmodule-helpers.js":"3uApo","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"kfDfZ","react-redux":"62sf7"}],"4OGiN":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$73d1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -43172,7 +43172,6 @@ _s(NavigationBar, "ODc3cjw/vvoWaLFqHWcEGODyOfo=", false, function() {
 });
 _c = NavigationBar;
 NavigationBar.propTypes = {
-    user: (0, _propTypesDefault.default).object.isRequired,
     onLoggedOut: (0, _propTypesDefault.default).func.isRequired
 };
 var _c;
@@ -47388,9 +47387,7 @@ _s(ProfileView, "Ce8MVpGC3ttCdmHhBmvFXp3qzMY=", false, function() {
 });
 _c = ProfileView;
 ProfileView.propTypes = {
-    localUser: (0, _propTypesDefault.default).object.isRequired,
-    movies: (0, _propTypesDefault.default).array.isRequired,
-    token: (0, _propTypesDefault.default).string.isRequired
+    localUser: (0, _propTypesDefault.default).object.isRequired
 };
 var _c;
 $RefreshReg$(_c, "ProfileView");
