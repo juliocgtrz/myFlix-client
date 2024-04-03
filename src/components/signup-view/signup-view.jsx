@@ -1,13 +1,14 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useDispatch } from "react-redux";
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [birthday, setBirthday] = useState("");
+    const dispatch = useDispatch();
 
     const handleSubmit = (event) => {
         event.preventDefault();
