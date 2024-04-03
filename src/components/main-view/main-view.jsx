@@ -19,7 +19,7 @@ export const MainView = () => {
     const storedToken = localStorage.getItem("token");
     const movies = useSelector((state) => state.movies.list);
     const user = useSelector((state) => state.user);
-    const [token, setToken] = useState(storedToken ? storedToken : null);
+    const token = useSelector((state) => state.user.token);
     const dispatch = useDispatch();
 
     //Load data from API
