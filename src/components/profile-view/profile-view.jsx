@@ -1,24 +1,37 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { Button, Card, Container } from "react-bootstrap";
+import { Button, Card, Container, Row, Col } from "react-bootstrap";
 import { UserInfo } from "./user-info";
 import { FavoriteMovies } from "./favorite-movies";
 import { UpdateUser } from "./update-user";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { useDispatch, useSelector } from "react-redux";
+import { MovieCard } from "../movie-card/movie-card";
+import { setUserData, clearUser } from "../../redux/reducers/user/user";
 
-export const ProfileView = ({localUser, movies, token }) => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+export const ProfileView = () => {
     const movies = useSelector((state) => state.movies.list);
     const user = useSelector((state) => state.user);
     const token = useSelector((state) => state.user.token);
     const dispatch = useDispatch();
 
+    const [localUser, setLocalUser] = useState(user);
     const [username, setUsername]= useState(storedUser.Username);
     const [password, setPassword]= useState(storedUser.Password);
     const [email,setEmail]= useState(storedUser.Email);
     const [birthday, setBirthday]= useState(storedUser.Birthday);
+
+    function fetchRequest(data, type) {
+        let fetchOptions = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Host: "https://my-movies-flix-db-60666e043a4b.herokuapp.com",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(data),
+        };
+
+        
+    }
     
     const favoriteMovies = localUser === undefined ? [] : movies.filter(m => localUser.FavoriteMovies?.includes(m.id));
 console.log(favoriteMovies)
@@ -154,8 +167,4 @@ console.log(favoriteMovies)
             </Row>
         </Container>
     );
-};
-
-ProfileView.propTypes = {
-    localUser: PropTypes.object.isRequired
 };
