@@ -240,11 +240,40 @@ export const ProfileView = () => {
                             }}
                         />
                         <div className="d-grid d-md-flex">
-                            <Button variant="danger" onClick={() => setShowDel}
+                            <Button variant="danger" onClick={() => setShowDeleteConfirmationModal(true)} disabled={!checkPhrase}>
+                                Delete Account
+                            </Button>
                         </div>
                     </Form>
                 </Col>
             </Row>
+            <Modal show={showPasswordChangeModal} onHide={() => setShowPasswordChangeModal(false)} centered animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="text-warning">Change Password</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to <span className="text-warning">change</span> your <span className="text-warning">password</span>?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowPasswordChangeModal(false)}>Cancel</Button>
+                    <Button variant="danger" onClick={handlePasswordChangeSubmit}>Change Password</Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={setShowDeleteConfirmationModal} onHide={() => setShowDeleteConfirmationModal(false)} centered animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="text-warning">Confirm Account Deletion</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to <span className="text-warning">delete</span> your account?<br />This action cannot be undone.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDeleteConfirmationModal(false)}>Cancel</Button>
+                    <Button variant="danger" onClick={handleDeleteAccount}>Delete Account</Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal size="sm" show={showModal} onHide={() => setShowModal(false)} centered animation={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="text-warning fs-5">{modalData.title}</Modal.Title>
+                </Modal.Header>
+            </Modal>
         </Container>
     );
 };
