@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const loginUser = createAsyncThunk(
     "user/login",
@@ -50,7 +50,7 @@ const userSlice = createSlice({
     name: "user",
     initialState: { userData: null, token: null, error: null },
     reducers: {
-        setUser: (state, action) => {
+        setUserData: (state, action) => {
             localStorage.setItem("user", JSON.stringify(action.payload));
             state.userData = action.payload;
         },
