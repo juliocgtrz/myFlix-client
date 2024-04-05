@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Container, Row, Col } from "react-bootstrap";
+import { Button, Card, Container, Row, Col, InputGroup } from "react-bootstrap";
 import { UserInfo } from "./user-info";
 import { FavoriteMovies } from "./favorite-movies";
 import { UpdateUser } from "./update-user";
@@ -14,10 +14,15 @@ export const ProfileView = () => {
     const dispatch = useDispatch();
 
     const [localUser, setLocalUser] = useState(user);
-    const [username, setUsername]= useState(storedUser.Username);
-    const [password, setPassword]= useState(storedUser.Password);
-    const [email,setEmail]= useState(storedUser.Email);
-    const [birthday, setBirthday]= useState(storedUser.Birthday);
+    const [newPassword, setNewPassword] = useState("");
+    const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
+    const [passwordShown, setPasswordShown] = useState(false);
+    const [checkPhrase, setCheckPhrase] = useState(false);
+    const UpdateUserDataURL = `https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.email}`;
+
+    const togglePasswordVisibility = () => {
+        setPasswordShown(!passwordShown);
+    };
 
     function fetchRequest(data, type) {
         let fetchOptions = {
@@ -30,139 +35,214 @@ export const ProfileView = () => {
             body: JSON.stringify(data),
         };
 
-        
+        fetch(UpdateUserDataURL, fetchOptions)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Failed to update account.");
+                }
+            })
+            .then(updateUser => {
+                setNewPassword("");
+                setNewPasswordRepeat("");
+                dispatch(setUserData(updateUser));
+            });
     }
     
-    const favoriteMovies = localUser === undefined ? [] : movies.filter(m => localUser.FavoriteMovies?.includes(m.id));
-console.log(favoriteMovies)
-    const formData = {
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: birthday
-    };
-    const handleSubmit = (event) => {
-        event.preventDefault(event);
-        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}`, {
-            method: "PUT",
-            body: JSON.stringify(formData),
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}` }
-            }
-        )
-        .then((response) => {
-            if (response.ok) {
-                alert("Update successful");
-                window.location.reload();
-
-                return response.json()
-            }
-            alert("Update failed");
-        })
-        .then((user) => {
-            if (user) {
-                localStorage.setItem("user", JSON.stringify(user));
-                setUser(user)
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    const handleUserUpdateSubmit = (event) => {
+        event.preventDefault();
+        
+        const data = {
+            firstname: localUser.firstname,
+            lastname: localUser.lastname,
+            email: localUser.email,
+            birthday: localUser.birthday,
+        };
+        fetchRequest(data, "userData");
     };
 
-    const handleUpdate = (e) => {
-        switch(e.target.type) {
-            case "text":
-                setUsername(e.target.value);
-                break;
-            case "password":
-                setPassword(e.target.value);
-                break;
-            case "email":
-                setEmail(e.target.value);
-                break;
-            case "date":
-                setBirthday(e.target.value);
-                default:
-        }
-    }
+    const handlePasswordChangeSubmit = (event) => {
+        event.preventDefault();
+
+        fetchRequest({ password: newPassword }, "password");
+    };
 
     const handleDeleteAccount = () => {
-        fetch (`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${storedUser.Username}`, {
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        };
+            
+        fetch(UpdateUserDataURL, {
             method: "DELETE",
-            headers: { Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-            }
-        }).then ((response) => {
-            if (response.ok) {
-                alert("Account deleted successfully");
-                localStorage.clear();
-                window.location.reload();
-            } else {
-                alert("Something went wrong");
+            headers: headers,
+        })
+            .then (response => {
+                if (response.ok) {
+                    dispatch(clearUser());
+                } else {
+                    throw new Error("Failed to delete account.");
                 }
-        });
+            });
+                
     };
 
-    useEffect(() => {
-        if (!token) {
-            return;
-        }
+    const StringToDeleteAccount = `Delete account ${user.email}`;
 
-        fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/users", {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log("Users data: ", data);
-            const usersFromApi = data.map((resultUser) => {
-                return {
-                    id: resultUser._id,
-                    username: resultUser.username,
-                    password: resultUser.password,
-                    email: resultUser.email,
-                    birthday: resultUser.birthday,
-                    favoriteMovies: resultUser.favoriteMovies
-                };
-            });
-            setUser(usersFromApi.find((u) => u.username === localUser.Username));
-            console.log("Profile Saved User: " + JSON.stringify(user));
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    }, [token]);
+    let favoriteMovies = user && user.favoriteMovies ? movies.filter(m => user.favoriteMovies.includes(m.id)) : [];
+    const favoriteMovieCards = favoriteMovies.map(movie => {
+        return <MovieCard key={movie.id} movie={movie} />;
+    });
 
     return (
-        <Container>
+        <Container className="mt-5">
             <Row>
-                <Card className="mb-5">
-                    <Card.Body>
-                        <Card.Title>My Profile</Card.Title>
-                        <Card.Text>
-                            {
-                                user && (<UserInfo name={user.Username} email={user.Email} />)
-                            }
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-                <Card className="mb-5">
-                    <Card.Body>
-                        <UpdateUser
-                            formData={formData}
-                            handleUpdate={handleUpdate}
-                            handleSubmit={handleSubmit}
-                            handleDeleteAccount={handleDeleteAccount}
-                        />
-                    </Card.Body>
-                </Card>
+                <Col>
+                    <h2 className="mb-4">My Movies</h2>
+                </Col>
             </Row>
+            <Row className="g-4">
+                {favoriteMovieCards.length > 0 ? favoriteMovieCards : <Col><p className="">Your list of favorite movies is still empty. :(</p></Col>}
+            </Row>
+            <hr></hr>
             <Row>
-                <Col className="mb-5" xs={12} md={12}>
-                    {
-                        favoriteMovies && (<FavoriteMovies user={user} favoriteMovies={favoriteMovies} />)
-                    }
+                <Col>
+                    <Form className="form" onSubmit={handleUserUpdateSubmit}>
+                        <h2 className="mb-4">Account Information</h2>
+                        <Form.Group className="my-3">
+                            <Form.Label htmlFor="Firstname">First Name</Form.Label>
+                            <Form.Control
+                                id="Firstname"
+                                type="text"
+                                value={localUser.firstname}
+                                onChange={(e) =>
+                                    setLocalUser((prevUser) => ({
+                                        ...prevUser,
+                                        firstname: e.target.value,
+                                    }))
+                                }
+                            />
+                        </Form.Group>
+                        <Form.Group className="my-3">
+                            <Form.Label htmlFor="Lastname">Last Name</Form.Label>
+                            <Form.Control
+                                id="Lastname"
+                                type="text"
+                                value={localUser.lastname}
+                                onChange={(e) =>
+                                    setLocalUser((prevUser) => ({
+                                        ...prevUser,
+                                        lastname: e.target.value,
+                                    }))
+                                }
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="my-3">
+                            <Form.Label htmlFor="Email">Email</Form.Label>
+                            <Form.Control
+                                id="Email"
+                                type="email"
+                                value={localUser.email}
+                                onChange={(e) =>
+                                    setLocalUser((prevUser) => ({
+                                        ...prevUser,
+                                        email: e.target.value,
+                                    }))
+                                }
+                            />
+                        </Form.Group>
+                        <Form.Group className="my-3">
+                            <Form.Label htmlFor="Birthday">Birthday</Form.Label>
+                            <Form.Control
+                                id="Birthday"
+                                type="date"
+                                value={formatDateForInput(localUser.birthday)}
+                                onChange={(e) => {
+                                    setLocalUser((prevUser) => ({
+                                        ...prevUser,
+                                        birthday: e.target.value,
+                                    }));
+                                }}
+                            />
+                        </Form.Group>
+                        <div className="d-grid d-md-flex">
+                            <Button type="submit" className="mt-2">
+                                Save
+                            </Button>
+                        </div>
+                    </Form>
+                    <Form
+                        className="form"
+                        onSubmit={(event) => {
+                            event.preventDefault();
+                        }}>
+                        <h4 className="mt-4">Change password</h4>
+                        <Form.Group className="">
+                            <Form.Label htmlFor="Password">Password</Form.Label>
+                            <InputGroup>
+                                <Form.Control
+                                    id="Password"
+                                    type={passwordShown ? "text" : "password"}
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    minLength="8"
+                                    isInvalid={newPassword && newPasswordRepeat && newPassword !== newPasswordRepeat}
+                                />
+                                <Button variant="outline-secondary" onClick={togglePasswordVisibility}>
+                                </Button>
+                            </InputGroup>
+                        </Form.Group>
+                        <Form.Group className="my-3">
+                            <Form.Label htmlFor="newPasswordRepeat">Repeat Password</Form.Label>
+                            <InputGroup>
+                                <Form.Control
+                                    id="newPasswordRepeat"
+                                    type={passwordShown ? "text" : "password"}
+                                    value={newPasswordRepeat}
+                                    onChange={(e) => setNewPasswordRepeat(e.target.value)}
+                                    minLength="8"
+                                    isInvalid={newPassword && newPasswordRepeat && newPassword !== newPasswordRepeat}
+                                />
+                                <Button variant="outline-secondary" onClick={togglePasswordVisibility}>
+                                </Button>
+                            </InputGroup>
+                            <Form.Control.Feedback type="invalid">
+                                Passwords must match.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <div className="d-grid d-md-flex">
+                            <Button
+                                type="submit"
+                                className="mt-2"
+                                disabled={!(newPassword && newPasswordRepeat && newPassword === newPasswordRepeat)}>
+                                Change Password
+                            </Button>
+                        </div>
+                    </Form>
+                    <hr></hr>
+                    <Form className="form" onSubmit={handleDeleteAccount}>
+                        <h3>Delete Account</h3>
+                        <Form.Label htmlFor="deleteAccountCheck">
+                            <p className="fw-lighter">To confirm account deletion, type:</p>
+                            <p className="unselectable">
+                                {" " + StringToDeleteAccount + " "}
+                            </p>
+                            <p className="fw-lighter">into the box below.</p>
+                        </Form.Label>
+                        <Form.Control
+                            className="mb-2"
+                            type="text"
+                            id="deleteAccountCheck"
+                            onChange={(e) => {
+                                e.target.value === StringToDeleteAccount ? setCheckPhrase(true) : setCheckPhrase(false);
+                            }}
+                        />
+                        <div className="d-grid d-md-flex">
+                            <Button variant="danger" onClick={() => setShowDel}
+                        </div>
+                    </Form>
                 </Col>
             </Row>
         </Container>
