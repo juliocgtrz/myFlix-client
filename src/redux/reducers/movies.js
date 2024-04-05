@@ -1,11 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMovies = createAsyncThunk(
     "movies/fetchMovies",
     async (token, { rejectWithValue }) => {
         try {
             const response = await fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/movies", {
-                headers: { Authorization: `Bearer ${token}`},
+                headers: { Authorization: `Bearer ${token}` },
             });
             if (!response.ok) {
                 throw new Error("Failed to fetch movies");
@@ -25,7 +25,7 @@ export const fetchMovies = createAsyncThunk(
     }
 );
 
-const moviesSlice = createSlice ({
+const moviesSlice = createSlice({
     name: "movies",
     initialState: {
         data: [],
