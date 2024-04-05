@@ -1,20 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/reducers/user/user";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Container, Row, Col, Form, Button, InputGroup, Modal } from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const userStatus = useSelector((state) => state.user.status);
+    const userError = useSelector((state) => state.user.error);
+    const dispatch = useDispatch();
+
+    const [passwordShown, setPasswordShown] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
+    const [localUserData, setLocalUserData] = useState({
+        email: "",
+        password: "",
+    });
+
+    const togglePasswordVisibility = () => {
+        setPasswordShown(!passwordShown);
+    }
+
     const handleSubmit = (event) => {
-        //this prevents the default behavior of the form which is to reload the entire page
         event.preventDefault();
-        dispatch(loginUser({ email: localUserData.email, password: localUserData.password}));
+        dispatch(loginUser({ email: localUserData.email, password: localUserData.password }));
     };
+
+    useEffect(() => {
+        if (userStatus === "failed") {
+            setModalMessage(userError);
+            setShowModal(true);
+        }
+    }, [userStatus, userError]);
 
     return (
         <Container className="mt-5">
@@ -23,22 +39,23 @@ export const LoginView = ({ onLoggedIn }) => {
                     <h3 className="mb-4">Login</h3>
                     <Form className="form" onSubmit={handleSubmit}>
                         <Form.Group>
-                            <Form.Label htmlFor="Username">Username:</Form.Label>
+                            <Form.Label htmlFor="Email">Email:</Form.Label>
                             <Form.Control
-                                type="text"
-                                minLength="5"
-                                value={localUserData.username}
+                                type="email"
+                                id="Email"
+                                className="rounded"
+                                value={localUserData.email}
                                 onChange={(e) =>
                                     setLocalUserData((prevlocalUserData) => ({
                                         ...prevlocalUserData,
-                                        username: e.target.value,
+                                        email: e.target.value,
                                     }))
                                 }
                                 required
                             />
                         </Form.Group>
                     
-                        <Form.Group className="mb-4">
+                        <Form.Group className="my-3">
                             <Form.Label htmlFor="Password">Password:</Form.Label>
                             <InputGroup>
                                 <Form.Control
@@ -54,12 +71,25 @@ export const LoginView = ({ onLoggedIn }) => {
                                     minLength="8"
                                     required
                                 />
+                                <Button
+                                    variant="outline-secondary"
+                                    onClick={togglePasswordVisibility}
+                                >
+                                </Button>
                             </InputGroup>
                         </Form.Group>
-                        <Button variant="primary" type="submit">Login</Button>
+                        <Button type="submit" className="mt-2">Login</Button>
                     </Form>
                 </Col>
             </Row>
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title className="text-warning">Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {modalMessage}
+                </Modal.Body>
+            </Modal>
         </Container>
     );
 };
