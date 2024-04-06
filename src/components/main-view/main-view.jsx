@@ -45,10 +45,10 @@ export const MainView = () => {
         if (!token && savedToken) {
             dispatch(setToken(savedToken));
         }
-        if (savedToken && !movies.length) {
+        if (savedToken && !movies?.length) {
             dispatch(fetchMovies(savedToken));
         }
-    }, [user, token, movies.length, dispatch]);
+    }, [user, token, movies?.length, dispatch]);
 
     return (
         <BrowserRouter>
@@ -65,14 +65,14 @@ export const MainView = () => {
                         path="/movies"
                         element={
                             !user ? <Navigate to="/login" replace /> :
-                                movies.length === 0 ?
+                                movies?.length === 0 ?
                                     <Col><h2 classname="my-4">No movies to display.</h2></Col> :
                                     <MoviesList />
                         }
                     />
                 <Route
                     path="/movies/:movieId"
-                    element={!user ? <Navigate to="/login" replace /> : movies.length === 0 ?
+                    element={!user ? <Navigate to="/login" replace /> : movies?.length === 0 ?
                         <Col>No movies to display.</Col> :
                         <MovieView />}
                 />
