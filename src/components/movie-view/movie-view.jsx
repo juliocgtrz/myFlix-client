@@ -1,5 +1,7 @@
 import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router";
+import { MovieCard } from "../movie-card/movie-card";
 import "./movie-view.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../redux/reducers/user/user";
