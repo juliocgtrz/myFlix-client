@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -24,8 +23,6 @@ export const MainView = () => {
     const user = useSelector((state) => state.user);
     const token = useSelector((state) => state.user.token);
     const dispatch = useDispatch();
-    // const storedUser = JSON.parse(localStorage.getItem("user"));
-    // const storedToken = localStorage.getItem("token");
 
     const safelyParseJSON = (json) => {
         try {
@@ -56,64 +53,41 @@ export const MainView = () => {
     return (
         <BrowserRouter>
             <NavigationBar />
-            <Row className="justify-content-md-center">
+            <Container className="mt-5">
                 <Routes>
-                    <Route
-                        path="/signup"
-                        element={
-                            user ?
-                                (<Navigate to="/" />
-                                ) : (
-                                    <Col md={5}>
-                                        <SignupView />
-                                    </Col>
-                                )}
-                    />
-                    <Route
-                        path="/login"
-                        element={
-                            user ?
-                                (<Navigate to="/" />) :
-                                <LoginView />
-                        }
-                    />
+                    <Route path="/signup" element={
+                        user ?
+                            (<Navigate to="/" />) : <SignupView />} />
+                    <Route path="/login" element={
+                        user ?
+                            (<Navigate to="/" />) : <LoginView />} />
                     <Route
                         path="/movies"
                         element={
                             !user ? <Navigate to="/login" replace /> :
                                 movies.length === 0 ?
-                                    <Col>
-                                        <h2 className="my-4">The list is empty!</h2>
-                                    </Col> :
+                                    <Col><h2 classname="my-4">No movies to display.</h2></Col> :
                                     <MoviesList />
                         }
                     />
-                    <Route
-                        path="/movies/:movieId"
-                        element={
-                            !user ?
-                                <Navigate to="/login" replace /> :
-                                movies.length === 0 ?
-                                    <Col>The list is empty!</Col> :
-                                    <Col md={8}>
-                                        <MovieView />
-                                    </Col>
-                        }
-                    />
-                    <Route
-                        path="/"
-                        element={
-                            user ? <Navigate to="/movies" replace /> : <Navigate to="/login" replace />}
-                    />
-                    <Route
-                        path="/profile"
-                        element={
-                            user ?
-                                <ProfileView /> : <Navigate to="/login" replace />
-                        }
-                    />
+                <Route
+                    path="/movies/:movieId"
+                    element={!user ? <Navigate to="/login" replace /> : movies.length === 0 ?
+                        <Col>No movies to display.</Col> :
+                        <MovieView />}
+                />
+                <Route
+                    path="/"
+                    element={user ? <Navigate to="/movies" replace /> :
+                        <Navigate to="/login" replace />}
+                />
+                <Route path="/profile"
+                    element={
+                        user ? <ProfileView /> : <Navigate to="/login" replace />
+                    }
+                />
                 </Routes>
-            </Row>
+            </Container>
         </BrowserRouter>
     );
 };
