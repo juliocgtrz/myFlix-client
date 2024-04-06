@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Container, Col } from "react-bootstrap";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -8,7 +8,6 @@ import { fetchMovies } from "../../redux/reducers/movies";
 import { setUserData, setToken } from "../../redux/reducers/user/user";
 
 //Components
-import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
