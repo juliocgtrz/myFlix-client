@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { MovieCard } from "./movie-card/movie-card";
 import { MoviesFilter } from "./movies-filter/movies-filter";
-import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 export const MoviesList = () => {
     const movies = useSelector((state) => state.movies.list);
     const filter = useSelector((state) => state.movies.filter).trim().toLowerCase();
 
-    let filteredMovies = movies.filter((movie) => {
+    let filteredMovies = movies?.filter((movie) => {
         return movie.title.toLowerCase().includes(filter);
     });
 
@@ -22,7 +21,7 @@ export const MoviesList = () => {
         }
     }, [filter]);
 
-    const movieCard = filteredMovies.map(movie => {
+    const movieCards = filteredMovies?.map(movie => {
         return <MovieCard key={movie.id} movie={movie} />;
     });
 
@@ -30,7 +29,7 @@ export const MoviesList = () => {
         <Row className="g-4">
             <MoviesFilter />
             <hr></hr>
-            {movieCard}
+            {movieCards}
         </Row>
     );
 };
