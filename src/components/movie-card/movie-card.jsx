@@ -16,10 +16,9 @@ export const MovieCard = ({ movie }) => {
             isFavorite
         }));
     }
-    function combineGenreNames(genre) {
-        return genre.map((genre) => genre.name).join(", ");
+    function combineGenreNames(genres) {
+        return genres.map((genre) => genre.name).join(", ");
     }
-
     return (
         <Col lg={4} md={6} className="mb-3">
             <Card className="p-0 card text-start">
