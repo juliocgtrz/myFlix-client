@@ -14,10 +14,10 @@ export const MoviesFilter = () => {
                 <InputGroup>
                     <Form.Control
                         id="filter"
-                        type = "text"
-                        placeholder = "Search..."
-                        value = {filter}
-                        onChange = {(e) => dispatch(setFilter(e.target.value))}
+                        type="text"
+                        placeholder="Search..."
+                        value={filter}
+                        onChange={(e) => dispatch(setFilter(e.target.value))}
                     />
                     <Button variant="outline-secondary" onClick={() => dispatch(setFilter(""))}>
                         Search
