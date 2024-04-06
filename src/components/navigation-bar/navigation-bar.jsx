@@ -1,6 +1,6 @@
 import React from "react";
-import { Navbar, Container, Nav, Row, Col, Form } from "react-bootstrap";
-import { Link, Route, Routes } from "react-router-dom";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearUser } from "../../redux/reducers/user/user";
 
@@ -12,7 +12,7 @@ export const NavigationBar = () => {
         <Navbar bg="light" expand="lg">
             <Container>
                 <Navbar.Brand as={Link} to ="/">
-                    MyFlix App
+                    <span className="h5">MyFlix App</span>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
