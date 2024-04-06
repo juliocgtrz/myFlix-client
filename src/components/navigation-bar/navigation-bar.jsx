@@ -14,8 +14,8 @@ export const NavigationBar = () => {
                 <Navbar.Brand as={Link} to ="/">
                     <span className="h5">MyFlix App</span>
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Toggle aria-controls="navbarResponsive" />
+                <Navbar.Collapse id="navbarResponsive">
                     <Nav className="me-auto">
                         {user === null ? (
                             <>
