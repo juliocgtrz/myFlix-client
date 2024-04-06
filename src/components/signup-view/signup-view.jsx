@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Modal, Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/reducers/user/user";
 
