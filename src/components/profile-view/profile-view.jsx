@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Button, Card, Container, Row, Col, InputGroup } from "react-bootstrap";
-import { UserInfo } from "./user-info";
-import { FavoriteMovies } from "./favorite-movies";
-import { UpdateUser } from "./update-user";
+import React, { useState } from "react";
+import { Button, Container, Row, Col, InputGroup, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { MovieCard } from "../movie-card/movie-card";
 import { setUserData, clearUser } from "../../redux/reducers/user/user";
@@ -18,6 +15,10 @@ export const ProfileView = () => {
     const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
     const [checkPhrase, setCheckPhrase] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [modalData, setModalData] = useState({ title: "", message: "" });
+    const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
+    const [showPasswordChangeModal, setShowPasswordChangeModal] = useState(false);
     const UpdateUserDataURL = `https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.email}`;
 
     const togglePasswordVisibility = () => {
@@ -35,6 +36,17 @@ export const ProfileView = () => {
             body: JSON.stringify(data),
         };
 
+        switch (type) {
+            case "userData":
+                setModalData({ title: "Update", message: "Changes saved.", error: false });
+                break;
+            case "password":
+                setModalData({ title: "Update", message: "New password saved.", error: false });
+                break;
+            default:
+                setModalData({ title: "Update", message: "User data updated successfully.", error: false });
+        }
+
         fetch(UpdateUserDataURL, fetchOptions)
             .then(response => {
                 if (response.ok) {
@@ -43,10 +55,15 @@ export const ProfileView = () => {
                     throw new Error("Failed to update account.");
                 }
             })
-            .then(updateUser => {
+            .then(updatedUser => {
                 setNewPassword("");
                 setNewPasswordRepeat("");
-                dispatch(setUserData(updateUser));
+                setShowModal(true);
+                dispatch(setUserData(updatedUser));
+            })
+            .catch((e) => {
+                setModalData({ title: "Error", message: `Something went wrong: ${e.message}`, error: true });
+                setShowModal(true);
             });
     }
     
@@ -64,11 +81,12 @@ export const ProfileView = () => {
 
     const handlePasswordChangeSubmit = (event) => {
         event.preventDefault();
-
+        setShowPasswordChangeModal(false);
         fetchRequest({ password: newPassword }, "password");
     };
 
     const handleDeleteAccount = () => {
+        setShowDeleteConfirmationModal(false);
         const headers = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -84,6 +102,10 @@ export const ProfileView = () => {
                 } else {
                     throw new Error("Failed to delete account.");
                 }
+            })
+            .catch((e) => {
+                setModalData({ title: "Error", message: `Something went wrong: ${e.message}` });
+                setShowModal(true);
             });
                 
     };
@@ -177,10 +199,11 @@ export const ProfileView = () => {
                         className="form"
                         onSubmit={(event) => {
                             event.preventDefault();
+                            setShowPasswordChangeModal(true);
                         }}>
                         <h4 className="mt-4">Change password</h4>
                         <Form.Group className="">
-                            <Form.Label htmlFor="Password">Password</Form.Label>
+                            <Form.Label htmlFor="Password">New Password</Form.Label>
                             <InputGroup>
                                 <Form.Control
                                     id="Password"
@@ -273,6 +296,7 @@ export const ProfileView = () => {
                 <Modal.Header closeButton>
                     <Modal.Title className="text-warning fs-5">{modalData.title}</Modal.Title>
                 </Modal.Header>
+                <Modal.Body>{modalData.message}</Modal.Body>
             </Modal>
         </Container>
     );
