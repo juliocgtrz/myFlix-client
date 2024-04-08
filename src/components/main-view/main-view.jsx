@@ -18,8 +18,8 @@ import { MoviesList } from "../movies-list";
 
 export const MainView = () => {
     //Redux
-    const movies = useSelector((state) => state.movies.list);
-    const user = useSelector((state) => state.user);
+    const movies = useSelector((state) => state.movies.data);
+    const user = useSelector((state) => state.user.userData);
     const token = useSelector((state) => state.user.token);
     const dispatch = useDispatch();
 
@@ -69,22 +69,22 @@ export const MainView = () => {
                                     <MoviesList />
                         }
                     />
-                <Route
-                    path="/movies/:movieId"
-                    element={!user ? <Navigate to="/login" replace /> : movies?.length === 0 ?
-                        <Col>No movies to display.</Col> :
-                        <MovieView />}
-                />
-                <Route
-                    path="/"
-                    element={user ? <Navigate to="/movies" replace /> :
-                        <Navigate to="/login" replace />}
-                />
-                <Route path="/profile"
-                    element={
-                        user ? <ProfileView /> : <Navigate to="/login" replace />
-                    }
-                />
+                    <Route
+                        path="/movies/:movieId"
+                        element={!user ? <Navigate to="/login" replace /> : movies?.length === 0 ?
+                            <Col>No movies to display.</Col> :
+                            <MovieView />}
+                    />
+                    <Route
+                        path="/"
+                        element={user ? <Navigate to="/movies" replace /> :
+                            <Navigate to="/login" replace />}
+                    />
+                    <Route path="/profile"
+                        element={
+                            user ? <ProfileView /> : <Navigate to="/login" replace />
+                        }
+                    />
                 </Routes>
             </Container>
         </BrowserRouter>
