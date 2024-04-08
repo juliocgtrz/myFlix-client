@@ -14,6 +14,10 @@ img {
   height: 400px;
 }
 
+.my-flix {
+  color: #4682b4;
+}
+
 :root, [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -13346,9 +13350,5 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
-}
-
-.my-flix {
-  color: #4682b4;
 }
 /*# sourceMappingURL=index.2212206d.css.map */
