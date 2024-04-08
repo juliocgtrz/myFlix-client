@@ -39,10 +39,10 @@ export const LoginView = ({ onLoggedIn }) => {
                     <h3 className="mb-4">Login</h3>
                     <Form className="form" onSubmit={handleSubmit}>
                         <Form.Group>
-                            <Form.Label htmlFor="Email">Email:</Form.Label>
+                            <Form.Label htmlFor="email">Email:</Form.Label>
                             <Form.Control
                                 type="email"
-                                id="Email"
+                                id="email"
                                 className="rounded"
                                 value={localUserData.email}
                                 onChange={(e) =>
@@ -56,10 +56,10 @@ export const LoginView = ({ onLoggedIn }) => {
                         </Form.Group>
                     
                         <Form.Group className="my-3">
-                            <Form.Label htmlFor="Password">Password:</Form.Label>
+                            <Form.Label htmlFor="password">Password:</Form.Label>
                             <InputGroup>
                                 <Form.Control
-                                    id="Password"
+                                    id="password"
                                     type={passwordShown ? "text" : "password"}
                                     value={localUserData.password}
                                     onChange={(e) => 
@@ -71,11 +71,6 @@ export const LoginView = ({ onLoggedIn }) => {
                                     minLength="8"
                                     required
                                 />
-                                <Button
-                                    variant="outline-secondary"
-                                    onClick={togglePasswordVisibility}
-                                >
-                                </Button>
                             </InputGroup>
                         </Form.Group>
                         <Button type="submit" className="mt-2">Login</Button>
