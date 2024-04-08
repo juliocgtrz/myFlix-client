@@ -5,8 +5,8 @@ import { MovieCard } from "../movie-card/movie-card";
 import { setUserData, clearUser } from "../../redux/reducers/user/user";
 
 export const ProfileView = () => {
-    const movies = useSelector((state) => state.movies.list);
-    const user = useSelector((state) => state.user);
+    const movies = useSelector((state) => state.movies.data);
+    const user = useSelector((state) => state.user.userData);
     const token = useSelector((state) => state.user.token);
     const dispatch = useDispatch();
 
@@ -19,7 +19,6 @@ export const ProfileView = () => {
     const [modalData, setModalData] = useState({ title: "", message: "" });
     const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
     const [showPasswordChangeModal, setShowPasswordChangeModal] = useState(false);
-    const UpdateUserDataURL = `https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.email}`;
 
     const togglePasswordVisibility = () => {
         setPasswordShown(!passwordShown);
@@ -47,7 +46,7 @@ export const ProfileView = () => {
                 setModalData({ title: "Update", message: "User data updated successfully.", error: false });
         }
 
-        fetch(UpdateUserDataURL, fetchOptions)
+        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.email}`, fetchOptions)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -92,7 +91,7 @@ export const ProfileView = () => {
             Authorization: `Bearer ${token}`,
         };
             
-        fetch(UpdateUserDataURL, {
+        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.email}`, {
             method: "DELETE",
             headers: headers,
         })
@@ -125,7 +124,7 @@ export const ProfileView = () => {
                 </Col>
             </Row>
             <Row className="g-4">
-                {favoriteMovieCards.length > 0 ? favoriteMovieCards : <Col><p className="">Your list of favorite movies is still empty. :(</p></Col>}
+                {favoriteMovieCards.length > 0 ? favoriteMovieCards : <Col><p className="">Your list of favorite movies is still empty.</p></Col>}
             </Row>
             <hr></hr>
             <Row>
@@ -180,7 +179,7 @@ export const ProfileView = () => {
                             <Form.Control
                                 id="Birthday"
                                 type="date"
-                                value={formatDateForInput(localUser.birthday)}
+                                value={localUser.birthday}
                                 onChange={(e) => {
                                     setLocalUser((prevUser) => ({
                                         ...prevUser,
