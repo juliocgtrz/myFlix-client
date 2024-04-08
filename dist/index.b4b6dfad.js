@@ -33971,7 +33971,8 @@ const loginUser = (0, _toolkit.createAsyncThunk)("user/login", async ({ email, p
         const response = await fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/login", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
                 email,
@@ -33987,11 +33988,11 @@ const loginUser = (0, _toolkit.createAsyncThunk)("user/login", async ({ email, p
 });
 const toggleFavorite = (0, _toolkit.createAsyncThunk)("user/toggleFavorite", async ({ movieId, isFavorite }, { getState, rejectWithValue })=>{
     const state = getState();
-    const token = state.user.token;
+    const token1 = state.user.token;
     const userEmail = state.user.userData.email;
     const headers = {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token1}`
     };
     const method = isFavorite ? "DELETE" : "POST";
     const url = `https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${userEmail}/favoriteMovies/${movieId}`;
@@ -45613,7 +45614,7 @@ const LoginView = ({ onLoggedIn })=>{
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
                                     children: [
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                                            htmlFor: "Email",
+                                            htmlFor: "email",
                                             children: "Email:"
                                         }, void 0, false, {
                                             fileName: "src/components/login-view/login-view.jsx",
@@ -45622,7 +45623,7 @@ const LoginView = ({ onLoggedIn })=>{
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                             type: "email",
-                                            id: "Email",
+                                            id: "email",
                                             className: "rounded",
                                             value: localUserData.email,
                                             onChange: (e)=>setLocalUserData((prevlocalUserData)=>({
@@ -45645,7 +45646,7 @@ const LoginView = ({ onLoggedIn })=>{
                                     className: "my-3",
                                     children: [
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                                            htmlFor: "Password",
+                                            htmlFor: "password",
                                             children: "Password:"
                                         }, void 0, false, {
                                             fileName: "src/components/login-view/login-view.jsx",
@@ -45653,32 +45654,22 @@ const LoginView = ({ onLoggedIn })=>{
                                             columnNumber: 29
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.InputGroup), {
-                                            children: [
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
-                                                    id: "Password",
-                                                    type: passwordShown ? "text" : "password",
-                                                    value: localUserData.password,
-                                                    onChange: (e)=>setLocalUserData((prevlocalUserData)=>({
-                                                                ...prevlocalUserData,
-                                                                password: e.target.value
-                                                            })),
-                                                    minLength: "8",
-                                                    required: true
-                                                }, void 0, false, {
-                                                    fileName: "src/components/login-view/login-view.jsx",
-                                                    lineNumber: 61,
-                                                    columnNumber: 33
-                                                }, undefined),
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
-                                                    variant: "outline-secondary",
-                                                    onClick: togglePasswordVisibility
-                                                }, void 0, false, {
-                                                    fileName: "src/components/login-view/login-view.jsx",
-                                                    lineNumber: 74,
-                                                    columnNumber: 33
-                                                }, undefined)
-                                            ]
-                                        }, void 0, true, {
+                                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                                                id: "password",
+                                                type: passwordShown ? "text" : "password",
+                                                value: localUserData.password,
+                                                onChange: (e)=>setLocalUserData((prevlocalUserData)=>({
+                                                            ...prevlocalUserData,
+                                                            password: e.target.value
+                                                        })),
+                                                minLength: "8",
+                                                required: true
+                                            }, void 0, false, {
+                                                fileName: "src/components/login-view/login-view.jsx",
+                                                lineNumber: 61,
+                                                columnNumber: 33
+                                            }, undefined)
+                                        }, void 0, false, {
                                             fileName: "src/components/login-view/login-view.jsx",
                                             lineNumber: 60,
                                             columnNumber: 29
@@ -45695,7 +45686,7 @@ const LoginView = ({ onLoggedIn })=>{
                                     children: "Login"
                                 }, void 0, false, {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 81,
+                                    lineNumber: 76,
                                     columnNumber: 25
                                 }, undefined)
                             ]
@@ -45726,25 +45717,25 @@ const LoginView = ({ onLoggedIn })=>{
                             children: "Error"
                         }, void 0, false, {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 87,
+                            lineNumber: 82,
                             columnNumber: 21
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 86,
+                        lineNumber: 81,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal).Body, {
                         children: modalMessage
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 89,
+                        lineNumber: 84,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 85,
+                lineNumber: 80,
                 columnNumber: 13
             }, undefined)
         ]
@@ -45963,7 +45954,7 @@ const SignupView = ()=>{
                                     className: "my-3",
                                     children: [
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                                            htmlFor: "Password",
+                                            htmlFor: "password",
                                             children: "Password"
                                         }, void 0, false, {
                                             fileName: "src/components/signup-view/signup-view.jsx",
