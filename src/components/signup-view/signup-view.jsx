@@ -107,7 +107,7 @@ export const SignupView = () => {
                             />
                         </Form.Group>
                         <Form.Group className="my-3">
-                            <Form.Label htmlFor="Password">Password</Form.Label>
+                            <Form.Label htmlFor="password">Password</Form.Label>
                             <InputGroup>
                                 <Form.Control
                                     id="password"
