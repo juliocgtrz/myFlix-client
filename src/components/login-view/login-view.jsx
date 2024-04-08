@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/reducers/user/user";
 import { Container, Row, Col, Form, Button, InputGroup, Modal } from "react-bootstrap";
