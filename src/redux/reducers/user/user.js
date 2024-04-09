@@ -3,13 +3,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const loginUser = createAsyncThunk(
     "user/login",
     async ({ email, password }, { rejectWithValue }) => {
-        console.log({email, password });
         try {
             const response = await fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
             });
+            console.log(response);
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.message.message || "Could not login");
