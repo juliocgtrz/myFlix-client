@@ -25,7 +25,7 @@ export const fetchMovies = createAsyncThunk(
     }
 );
 
-const moviesSlice = createSlice({
+const movieSlice = createSlice({
     name: "movies",
     initialState: {
         data: [],
@@ -39,9 +39,29 @@ const moviesSlice = createSlice({
         setFilter: (state, action) => {
             state.filter = action.payload;
         }
-    }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchMovies.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(fetchMovies.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.data = action.payload;
+            })
+            .addCase(fetchMovies.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload;
+            })
+            .addMatcher(
+                action => action.type === "user/clearUser",
+                (state) => {
+                    state.filter = "";
+                }
+            );
+    },
 });
 
 //Exporting reducers
-export const { setMovies, setFilter } = moviesSlice.actions;
-export default moviesSlice.reducer;
+export const { setMovies, setFilter } = movieSlice.actions;
+export default movieSlice.reducer;
