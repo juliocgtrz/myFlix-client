@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Container, Col } from "react-bootstrap";
+import { Container, Col, Spinner } from "react-bootstrap";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -19,6 +19,8 @@ import { MoviesList } from "../movies-list";
 export const MainView = () => {
     //Redux
     const movies = useSelector((state) => state.movies.data);
+    const moviesStatus = useSelector((state) => state.movies.status);
+    const moviesError = useSelector((state) => state.movies.error);
     const user = useSelector((state) => state.user.userData);
     const token = useSelector((state) => state.user.token);
     const dispatch = useDispatch();
@@ -48,6 +50,32 @@ export const MainView = () => {
             dispatch(fetchMovies(savedToken));
         }
     }, [user, token, movies?.length, dispatch]);
+
+    if (moviesStatus === "loading") {
+        return (
+            <Container>
+                <Row>
+                    <Col className="d-flex justify-content-center align-items-center">
+                        <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading..</span>
+                        </Spinner>
+                    </Col>
+                </Row>
+            </Container>
+        );
+    };
+
+    if (moviesStatus === "failed") {
+        return (
+            <Container>
+                <Row>
+                    <Col className="d-flex justify-content-center align-items-center">
+                        <p>Error fetching movies: {moviesError}</p>
+                    </Col>
+                </Row>
+            </Container>
+        );
+    };
 
     return (
         <BrowserRouter>
