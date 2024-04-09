@@ -23,7 +23,7 @@ export const MovieCard = ({ movie }) => {
         <Col lg={4} md={6} className="mb-3">
             <Card className="p-0 card text-start">
                 <div style={{ position: "relative" }}>
-                    <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+                    <Link to={`/movies/${encodeURIComponent(movie.title)}`}>
                         <Card.Img
                             src={movie.ImagePath}
                             alt={`Movie poster of ${movie.title}`}
