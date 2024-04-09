@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/reducers/user/user";
-import { Container, Row, Col, Form, Button, InputGroup, Modal } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, InputGroup, Modal, Spinner } from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
     const userStatus = useSelector((state) => state.user.status);
@@ -31,6 +31,20 @@ export const LoginView = ({ onLoggedIn }) => {
             setShowModal(true);
         }
     }, [userStatus, userError]);
+
+    if (userStatus === "loading") {
+        return (
+            <Container>
+                <Row>
+                    <Col className="d-flex justify-content-center align-items-center" >
+                        <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading..</span>
+                        </Spinner>
+                    </Col>
+                </Row>
+            </Container>
+        );
+    };
 
     return (
         <Container className="mt-5">
