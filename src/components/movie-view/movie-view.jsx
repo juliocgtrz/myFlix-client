@@ -24,7 +24,7 @@ export const MovieView = () => {
     }
 
     return (
-        <Container className="col-xl-10 xol-l-11">
+        <Container className="col-xl-10 col-l-11">
             <Row>
                 <Col md={6} className="p-3">
                     <h1>{movie.title}</h1>
