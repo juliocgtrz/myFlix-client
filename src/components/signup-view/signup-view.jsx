@@ -14,7 +14,7 @@ const signupUser = async (userData) => {
         const data = await response.json();
 
         if (response.status === 422) {
-            throw new Error(data.erros.map(err => err.msg).join(", "));
+            throw new Error(data.errors.map(err => err.msg).join(", "));
         } else if (response.status === 201) {
             return data;
         }else if (response.status === 500) {
@@ -118,11 +118,6 @@ export const SignupView = () => {
                                     minLength="8"
                                     required
                                 />
-                                <Button
-                                    variant="outline-secondary"
-                                    onClick={togglePasswordVisibility}
-                                >
-                                </Button>
                             </InputGroup>
                         </Form.Group>
                         <Form.Group className="my-3">
