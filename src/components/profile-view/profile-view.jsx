@@ -132,9 +132,9 @@ export const ProfileView = () => {
                     <Form className="form" onSubmit={handleUserUpdateSubmit}>
                         <h2 className="mb-4">Account Information</h2>
                         <Form.Group className="my-3">
-                            <Form.Label htmlFor="Firstname">First Name</Form.Label>
+                            <Form.Label htmlFor="firstname">First Name</Form.Label>
                             <Form.Control
-                                id="Firstname"
+                                id="firstname"
                                 type="text"
                                 value={localUser.firstname}
                                 onChange={(e) =>
@@ -146,9 +146,9 @@ export const ProfileView = () => {
                             />
                         </Form.Group>
                         <Form.Group className="my-3">
-                            <Form.Label htmlFor="Lastname">Last Name</Form.Label>
+                            <Form.Label htmlFor="lastname">Last Name</Form.Label>
                             <Form.Control
-                                id="Lastname"
+                                id="lastname"
                                 type="text"
                                 value={localUser.lastname}
                                 onChange={(e) =>
@@ -161,9 +161,9 @@ export const ProfileView = () => {
                             />
                         </Form.Group>
                         <Form.Group className="my-3">
-                            <Form.Label htmlFor="Email">Email</Form.Label>
+                            <Form.Label htmlFor="email">Email</Form.Label>
                             <Form.Control
-                                id="Email"
+                                id="email"
                                 type="email"
                                 value={localUser.email}
                                 onChange={(e) =>
@@ -175,9 +175,9 @@ export const ProfileView = () => {
                             />
                         </Form.Group>
                         <Form.Group className="my-3">
-                            <Form.Label htmlFor="Birthday">Birthday</Form.Label>
+                            <Form.Label htmlFor="birthday">Birthday</Form.Label>
                             <Form.Control
-                                id="Birthday"
+                                id="birthday"
                                 type="date"
                                 value={localUser.birthday}
                                 onChange={(e) => {
@@ -202,22 +202,20 @@ export const ProfileView = () => {
                         }}>
                         <h4 className="mt-4">Change password</h4>
                         <Form.Group className="">
-                            <Form.Label htmlFor="Password">New Password</Form.Label>
+                            <Form.Label htmlFor="password">New Password</Form.Label>
                             <InputGroup>
                                 <Form.Control
-                                    id="Password"
+                                    id="password"
                                     type={passwordShown ? "text" : "password"}
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
                                     minLength="8"
                                     isInvalid={newPassword && newPasswordRepeat && newPassword !== newPasswordRepeat}
                                 />
-                                <Button variant="outline-secondary" onClick={togglePasswordVisibility}>
-                                </Button>
                             </InputGroup>
                         </Form.Group>
                         <Form.Group className="my-3">
-                            <Form.Label htmlFor="newPasswordRepeat">Repeat Password</Form.Label>
+                            <Form.Label htmlFor="newPasswordRepeat">Reenter Password</Form.Label>
                             <InputGroup>
                                 <Form.Control
                                     id="newPasswordRepeat"
@@ -227,8 +225,6 @@ export const ProfileView = () => {
                                     minLength="8"
                                     isInvalid={newPassword && newPasswordRepeat && newPassword !== newPasswordRepeat}
                                 />
-                                <Button variant="outline-secondary" onClick={togglePasswordVisibility}>
-                                </Button>
                             </InputGroup>
                             <Form.Control.Feedback type="invalid">
                                 Passwords must match.
