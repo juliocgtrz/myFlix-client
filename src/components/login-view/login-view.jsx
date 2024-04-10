@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { Container, Row, Col, Form, Button, InputGroup, Modal, Spinner } from "react-bootstrap";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/reducers/user/user";
-import { Container, Row, Col, Form, Button, InputGroup, Modal, Spinner } from "react-bootstrap";
+
 
 export const LoginView = ({ onLoggedIn }) => {
     const userStatus = useSelector((state) => state.user.status);
