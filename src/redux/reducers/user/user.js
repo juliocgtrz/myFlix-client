@@ -49,7 +49,7 @@ export const toggleFavorite = createAsyncThunk(
 
 const userSlice = createSlice({
     name: "user",
-    initialState: { userData: null, token: null, error: null },
+    initialState: { userData: null, token: null, status: "idle", error: null },
     reducers: {
         setUserData: (state, action) => {
             localStorage.setItem("user", JSON.stringify(action.payload));
