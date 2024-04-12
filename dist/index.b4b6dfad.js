@@ -34036,7 +34036,6 @@ parcelHelpers.export(exports, "clearUser", ()=>clearUser);
 var _toolkit = require("@reduxjs/toolkit");
 const loginUser = (0, _toolkit.createAsyncThunk)("user/login", async ({ email, password }, { rejectWithValue })=>{
     try {
-        app.options("*", cors());
         const response = await fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/login", {
             method: "POST",
             headers: {
