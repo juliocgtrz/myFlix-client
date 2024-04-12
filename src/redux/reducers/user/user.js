@@ -21,7 +21,7 @@ export const loginUser = createAsyncThunk(
     }
 );
 
-export const toggleFavorite = createAsyncThunk(
+export const toggleFavorite = createAsyncThunk( 
     "user/toggleFavorite",
     async ({ movieId, isFavorite }, { getState, rejectWithValue }) => {
         const state = getState();
