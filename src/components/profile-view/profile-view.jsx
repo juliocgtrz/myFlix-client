@@ -46,7 +46,7 @@ export const ProfileView = () => {
                 setModalData({ title: "Update", message: "User data updated successfully.", error: false });
         }
 
-        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.email}`, fetchOptions)
+        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.username}`, fetchOptions)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -70,8 +70,7 @@ export const ProfileView = () => {
         event.preventDefault();
         
         const data = {
-            firstname: localUser.firstname,
-            lastname: localUser.lastname,
+            username: localUser.username,
             email: localUser.email,
             birthday: localUser.birthday,
         };
@@ -91,7 +90,7 @@ export const ProfileView = () => {
             Authorization: `Bearer ${token}`,
         };
             
-        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.email}`, {
+        fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.username}`, {
             method: "DELETE",
             headers: headers,
         })
@@ -109,7 +108,7 @@ export const ProfileView = () => {
                 
     };
 
-    const StringToDeleteAccount = `Delete account ${user.email}`;
+    const StringToDeleteAccount = `Delete account ${user.username}`;
 
     let favoriteMovies = user && user.favoriteMovies ? movies.filter(m => user.favoriteMovies.includes(m.id)) : [];
     const favoriteMovieCards = favoriteMovies.map(movie => {
@@ -132,29 +131,15 @@ export const ProfileView = () => {
                     <Form className="form" onSubmit={handleUserUpdateSubmit}>
                         <h2 className="mb-4">Account Information</h2>
                         <Form.Group className="my-3">
-                            <Form.Label htmlFor="firstname">First Name</Form.Label>
+                            <Form.Label htmlFor="username">Username</Form.Label>
                             <Form.Control
-                                id="firstname"
+                                id="username"
                                 type="text"
-                                value={localUser.firstname}
+                                value={localUser.username}
                                 onChange={(e) =>
                                     setLocalUser((prevUser) => ({
                                         ...prevUser,
-                                        firstname: e.target.value,
-                                    }))
-                                }
-                            />
-                        </Form.Group>
-                        <Form.Group className="my-3">
-                            <Form.Label htmlFor="lastname">Last Name</Form.Label>
-                            <Form.Control
-                                id="lastname"
-                                type="text"
-                                value={localUser.lastname}
-                                onChange={(e) =>
-                                    setLocalUser((prevUser) => ({
-                                        ...prevUser,
-                                        lastname: e.target.value,
+                                        username: e.target.value,
                                     }))
                                 }
                                 required
