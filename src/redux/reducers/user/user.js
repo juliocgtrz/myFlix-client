@@ -2,12 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const loginUser = createAsyncThunk(
     "user/login",
-    async ({ email, password }, { rejectWithValue }) => {
+    async ({ username, password }, { rejectWithValue }) => {
         try {
             const response = await fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ username, password }),
             });
             console.log(response);
             const data = await response.json();
@@ -26,13 +26,13 @@ export const toggleFavorite = createAsyncThunk(
     async ({ movieId, isFavorite }, { getState, rejectWithValue }) => {
         const state = getState();
         const token = state.user.token;
-        const userEmail = state.user.userData.email;
+        const username = state.user.userData.Username;
         const headers = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         };
         const method = isFavorite ? "DELETE" : "POST";
-        const url = `https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${userEmail}/favoriteMovies/${movieId}`;
+        const url = `https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${username}/favoriteMovies/${movieId}`;
 
         try {
             const response = await fetch(url, { method, headers });
