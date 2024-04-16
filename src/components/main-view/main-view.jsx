@@ -16,6 +16,18 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [token, setToken] = useState(storedToken ? storedToken : null);
+    const [query, setQuery] = useState("");
+
+    const getFilteredMovies = (query, movies) => {
+        if(!query) {
+            return;
+        }
+        if(typeof query === "string") {
+            return movies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase()));
+            console.log("getFilteredMovies is running and query is: ", query);
+        }
+    };
+    const filteredMovies = getFilteredMovies(query, movies);
 
     useEffect(() => {
         if (!token) {
@@ -53,6 +65,7 @@ export const MainView = () => {
                     setToken(null);
                     localStorage.clear();
                 }}
+                setQuery={setQuery}
             />
             <Row className="justify-content-md-center">
                 <Routes>
@@ -108,6 +121,14 @@ export const MainView = () => {
                                     <Navigate to="/login" replace />
                                 ) : movies.length === 0 ? (
                                     <Col>The list is empty!</Col>
+                                ) : filteredMovies && filteredMovies.length > 0 ? (
+                                    <>
+                                        {filteredMovies.map((movie, index) => (
+                                            <Col key={index} xs={12} sm={4}>
+                                                <MovieCard movie={movie} />
+                                            </Col>
+                                        ))}
+                                    </>
                                 ) : (
                                     <>
                                         {movies.map((movie) => (
