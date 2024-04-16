@@ -27,7 +27,8 @@ const signupUser = async (userData) => {
 
 export const SignupView = () => {
     const [formData, setFormData] = useState({
-        username: "",
+        firstname: "",
+        lastname: "",
         email: "",
         password: "",
         birthday: "",
@@ -54,9 +55,9 @@ export const SignupView = () => {
         try {
             const userData = await signupUser(formData);
 
-            setModalContent({ title: "Hello", message: `Signup successful! Welcome, ${userData.username || "user"}. `});
+            setModalContent({ title: "Hello", message: `Signup successful! Welcome, ${userData.name || "user"}. `});
             setShowModal(true);
-            dispatch(loginUser({ username: formData.username, password: formData.password }));
+            dispatch(loginUser({ email: formData.email, password: formData.password }));
         } catch (error) {
             setModalContent({ title: "Error", message: error.message });
             setShowModal(true);
@@ -70,13 +71,25 @@ export const SignupView = () => {
                     <h3 className="mb-4">Sign Up</h3>
                     <Form className="form" onSubmit={handleSubmit}>
                         <Form.Group className="my-3">
-                            <Form.Label htmlFor="username">Username</Form.Label>
+                            <Form.Label htmlFor="firstname">First Name</Form.Label>
                             <Form.Control
                                 type="text"
-                                id="username"
-                                name="username"
+                                id="firstname"
+                                name="firstname"
                                 className="rounded"
-                                value={formData.username}
+                                value={formData.firstname}
+                                onChange={handleChange}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="my-3">
+                            <Form.Label htmlFor="lastname">Last Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                id="lastname"
+                                name="lastname"
+                                className="rounded"
+                                value={formData.lastname}
                                 onChange={handleChange}
                                 required
                             />
