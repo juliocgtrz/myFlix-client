@@ -14,7 +14,7 @@ export const LoginView = ({ onLoggedIn }) => {
     const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
     const [localUserData, setLocalUserData] = useState({
-        username: "",
+        email: "",
         password: "",
     });
 
@@ -24,7 +24,7 @@ export const LoginView = ({ onLoggedIn }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(loginUser({ username: localUserData.username, password: localUserData.password }));
+        dispatch(loginUser({ email: localUserData.email, password: localUserData.password }));
     };
 
     useEffect(() => {
@@ -55,16 +55,16 @@ export const LoginView = ({ onLoggedIn }) => {
                     <h3 className="mb-4">Login</h3>
                     <Form className="form" onSubmit={handleSubmit}>
                         <Form.Group>
-                            <Form.Label htmlFor="username">Username:</Form.Label>
+                            <Form.Label htmlFor="email">Email:</Form.Label>
                             <Form.Control
-                                type="username"
-                                id="username"
+                                type="email"
+                                id="email"
                                 className="rounded"
-                                value={localUserData.username}
+                                value={localUserData.email}
                                 onChange={(e) =>
                                     setLocalUserData((prevlocalUserData) => ({
                                         ...prevlocalUserData,
-                                        username: e.target.value,
+                                        email: e.target.value,
                                     }))
                                 }
                                 required
