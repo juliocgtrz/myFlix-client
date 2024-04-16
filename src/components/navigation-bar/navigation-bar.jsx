@@ -3,9 +3,9 @@ import { Navbar, Container, Nav, Row, Col, Form } from "react-bootstrap";
 import { Link, Route, Routes } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export const NavigationBar = ({ user, movies, onLoggedOut }) => {
+export const NavigationBar = ({ user, movies, onLoggedOut, setQuery }) => {
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark" expand="lg" bg="primary" className="nav navbar-dark">
             <Container>
                 <Navbar.Brand as={Link} to ="/">
                     MyFlix App
@@ -32,6 +32,11 @@ export const NavigationBar = ({ user, movies, onLoggedOut }) => {
                                     Profile
                                 </Nav.Link>
                                 <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                                <Navbar.Text>Search Movies:</Navbar.Text>
+                                <input
+                                    type="text"
+                                    onChange={(e) => setQuery(e.target.value)}
+                                />
                             </>
                         )}
                     </Nav>
