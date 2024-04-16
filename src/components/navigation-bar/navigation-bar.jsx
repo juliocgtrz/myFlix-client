@@ -1,23 +1,19 @@
 import React from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { clearUser } from "../../redux/reducers/user/user";
+import { Navbar, Container, Nav, Row, Col, Form } from "react-bootstrap";
+import { Link, Route, Routes } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export const NavigationBar = () => {
-    const user = useSelector((state) => state.user.userData);
-    const dispatch = useDispatch();
-
+export const NavigationBar = ({ user, movies, onLoggedOut }) => {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
                 <Navbar.Brand as={Link} to ="/">
-                    <span className="h5">MyFlix App</span>
+                    MyFlix App
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarResponsive" />
-                <Navbar.Collapse id="navbarResponsive">
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        {user === null ? (
+                        {!user && (
                             <>
                                 <Nav.Link as={Link} to="/login">
                                     Login
@@ -26,26 +22,26 @@ export const NavigationBar = () => {
                                     Signup
                                 </Nav.Link>
                             </>
-                        ) : (
+                        )}
+                        {user && (
                             <>
-                                <Nav.Link as={Link} to="/movies">
+                                <Nav.Link as={Link} to="/">
                                     Home
                                 </Nav.Link>
                                 <Nav.Link as={Link} to="/profile">
                                     Profile
                                 </Nav.Link>
+                                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
                             </>
                         )}
                     </Nav>
-                    {user !== null && (
-                        <Nav>
-                            <Nav.Link onClick={() => dispatch(clearUser())} className="ms-auto text-warning">
-                                Logout
-                            </Nav.Link>
-                        </Nav>
-                    )}
                 </Navbar.Collapse>
             </Container>
         </Navbar>
     );
+};
+
+NavigationBar.propTypes = {
+    user: PropTypes.object.isRequired,
+    onLoggedOut: PropTypes.func.isRequired
 };

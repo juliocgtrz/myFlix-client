@@ -1,57 +1,116 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Col, Card } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorite } from "../../redux/reducers/user/user";
 
-export const MovieCard = ({ movie }) => {
-    const isFavorite = useSelector((state) => state.user.userData.favoriteMovies.includes(movie.id));
-    const dispatch = useDispatch();
+export const MovieCard = ({ movie, isFavorite }) => {
+    const storedToken = localStorage.getItem("token");
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const [user, setUser] = useState(storedUser ? storedUser: null);
+    const [token, setToken] = useState(storedToken ? storedToken : null);
 
-    const toggle = () => {
-        dispatch(toggleFavorite({
-            movieId: movie.id,
-            isFavorite
-        }));
-    }
-    function combineGenreNames(genres) {
-        return genres.map((genre) => genre.name).join(", ");
-    }
+    const [addTitle, setAddTitle] = useState("");
+    const [delTitle, setDelTitle] = useState("");
+
+    useEffect(() => {
+        const addToFavorites = () => {
+            fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}/movies/${encodeURIComponent(movie.id)}`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            )
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to add movie to favorites.");
+                }
+                alert("Movie added to favorites successfully!");
+                window.location.reload();
+                return response.json();
+            })
+            .then((user) => {
+                if (user) {
+                    localStorage.setItem("user", JSON.stringify(user));
+                    setUser(user);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+        };
+        const removeFromFavorites = () => {
+            fetch(`https://my-movies-flix-db-60666e043a4b.herokuapp.com/users/${user.Username}/movies/${encodeURIComponent(movie.id)}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            )
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to remove movie from favorites.");
+                }
+                alert("Movie removed from favorites successfully!");
+                window.location.reload();
+                return response.json();
+            })
+            .then((user) => {
+                if (user) {
+                    localStorage.setItem("user", JSON.stringify(user));
+                    setUser(user);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        };
+        if (addTitle) {
+            addToFavorites();
+        }
+        if (delTitle) {
+            removeFromFavorites();
+        }
+    }, [addTitle, delTitle, token]);
+
+    const handleAddToFavorites = () => {
+        setAddTitle(movie.title);
+    };
+    const handleRemoveFromFavorites = () => {
+        setDelTitle(movie.title);
+    };
+
     return (
-        <Col lg={4} md={6} className="mb-3">
-            <Card className="p-0 card text-start">
-                <div style={{ position: "relative" }}>
-                    <Link to={`/movies/${encodeURIComponent(movie.title)}`}>
-                        <Card.Img
-                            src={movie.ImagePath}
-                            alt={`Movie poster of ${movie.title}`}
-                            variant="top"
-                        />
-                    </Link>
-                </div>
-                <Card.Body className="p-2">
-                    <Card.Title className="mb-1">
-                        <Link to={`/movies/${encodeURIComponent(movie.id)}`} className="link">
-                            {movie.title}
-                        </Link>
-                    </Card.Title>
-                    <Card.Text className="card-text">
-                        {movie.description}
-                    </Card.Text>
+        <>
+            <Link to={`/movies/${encodeURIComponent(movie.id)}`} className="movie-view">
+            <Card className="h-100">
+                <Card.Img variant="top" src={movie.image} className="object-fit-cover" />
+                <Card.Body>
+                    <Card.Title>{movie.title}</Card.Title>
+                    <Card.Text>{movie.director}</Card.Text>
                 </Card.Body>
-                <Card.Footer className="text-end p-2">
-                    <small className="text-muted">
-                        {combineGenreNames(movie.genre)}
-                    </small>
-                </Card.Footer>
             </Card>
-        </Col>
+            </Link>
+            <Card>
+                {isFavorite ? (
+                    <Button variant="primary" onClick={handleRemoveFromFavorites}>Remove</Button>
+                ) : (
+                    <Button variant="primary" onClick={handleAddToFavorites}>Add</Button>
+                )}
+            </Card>
+        </>
     );
 };
 
 MovieCard.propTypes = {
+    isFavorite: PropTypes.bool.isRequired,
     movie: PropTypes.shape({
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
@@ -59,5 +118,6 @@ MovieCard.propTypes = {
         description: PropTypes.string.isRequired,
         genre: PropTypes.string.isRequired,
         director: PropTypes.string.isRequired,
+        featured: PropTypes.bool
     }).isRequired,
 };
