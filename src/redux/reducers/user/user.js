@@ -4,7 +4,6 @@ export const loginUser = createAsyncThunk(
     "user/login",
     async ({ email, password }, { rejectWithValue }) => {
         try {
-            app.options('*', cors())
             const response = await fetch("https://my-movies-flix-db-60666e043a4b.herokuapp.com/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
