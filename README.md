@@ -13,7 +13,7 @@ myFlix is a React application for users to explore a list of movies and add favo
   <li>Filter to movies to search for a specific movie</li>
 </ul>
 
-<h2>Dependencies</h2>
+<h2>Technologies</h2>
 <ul>
   <li>React</li>
   <li>React DOM</li>
@@ -26,6 +26,31 @@ myFlix is a React application for users to explore a list of movies and add favo
   <li>PropTypes for type-checking props</li>
 </ul>
 
+<h2>Dependencies</h2>
+<ul>
+  <li>bootstrap: ^5.3.3</li>
+  <li>prop-types: ^15.8.1</li>
+  <li>react: ^18.2.0</li>
+  <li>react-bootstrap: ^2.10.1</li>
+  <li>react-dom: ^18.2.0</li>
+  <li>react-router: ^6.22.3</li>
+  <li>react-router-dom: ^6.22.3</li>
+</ul>
+
+<h2>DevDependencies</h2>
+<ul>
+  <li>@parcel/transformer-sass: ^2.12.0</li>
+  <li>parcel: ^2.12.0</li>
+  <li>process: ^0.11.10</li>
+</ul>
+
+<h2>Getting Started</h2>
+<ol>
+  <li>Clone the repository: https://github.com/juliocgtrz/myFlix-client.git</li>
+  <li>Install dependencies: $npm install</li>
+  <li>Start the development server: $npm start</li>
+  <li>Open http://localhost:1234/ to view the application.</li>
+</ol>
 
 Test the project using Parcel by entering the following in the terminal while in the myFlix-client folder:
 parcel build command: parcel build src/index.html
